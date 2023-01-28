@@ -1,4 +1,4 @@
-import { InvalidNameLengthError } from '../../errors/InvalidNameLengthError';
+import { InvalidNameLengthError } from '@errors/InvalidNameLengthError';
 
 export class Name {
   private readonly name: string;

@@ -1,4 +1,4 @@
-import { InvalidUsernameLengthError } from '../../errors/InvalidUsernameLengthError';
+import { InvalidUsernameLengthError } from '@errors/InvalidUsernameLengthError';
 import { Username } from './username';
 
 describe('Username', () => {

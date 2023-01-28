@@ -1,4 +1,4 @@
-import { InvalidPasswordLengthError } from '../../errors/InvalidPasswordLengthError';
+import { InvalidPasswordLengthError } from '@errors/InvalidPasswordLengthError';
 
 export class Password {
   private readonly password: string;

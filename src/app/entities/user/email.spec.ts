@@ -1,8 +1,8 @@
-import { InvalidEmailDomainError } from '../../errors/InvalidEmailDomainError';
-import { InvalidEmailDomainSegmentError } from '../../errors/InvalidEmailDomainSegmentError';
-import { InvalidEmailLengthError } from '../../errors/InvalidEmailLengthError';
-import { InvalidEmailLocalError } from '../../errors/InvalidEmailLocalError';
-import { InvalidEmailPatternError } from '../../errors/InvalidEmailPatternError';
+import { InvalidEmailDomainError } from '@errors/InvalidEmailDomainError';
+import { InvalidEmailDomainSegmentError } from '@errors/InvalidEmailDomainSegmentError';
+import { InvalidEmailLengthError } from '@errors/InvalidEmailLengthError';
+import { InvalidEmailLocalError } from '@errors/InvalidEmailLocalError';
+import { InvalidEmailPatternError } from '@errors/InvalidEmailPatternError';
 import { Email } from './email';
 
 describe('Email', () => {

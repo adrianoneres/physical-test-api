@@ -1,8 +1,8 @@
-import { InvalidEmailDomainError } from '../../errors/InvalidEmailDomainError';
-import { InvalidEmailDomainSegmentError } from '../../errors/InvalidEmailDomainSegmentError';
-import { InvalidEmailLengthError } from '../../errors/InvalidEmailLengthError';
-import { InvalidEmailLocalError } from '../../errors/InvalidEmailLocalError';
-import { InvalidEmailPatternError } from '../../errors/InvalidEmailPatternError';
+import { InvalidEmailDomainError } from '@errors/InvalidEmailDomainError';
+import { InvalidEmailDomainSegmentError } from '@errors/InvalidEmailDomainSegmentError';
+import { InvalidEmailLengthError } from '@errors/InvalidEmailLengthError';
+import { InvalidEmailLocalError } from '@errors/InvalidEmailLocalError';
+import { InvalidEmailPatternError } from '@errors/InvalidEmailPatternError';
 
 const PATTERN =
   /^[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
