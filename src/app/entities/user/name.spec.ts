@@ -1,4 +1,4 @@
-import { InvalidNameLengthError } from '@errors/InvalidNameLengthError';
+import { InvalidNameLengthError } from '@errors/invalid-name-length-error';
 import { Name } from './name';
 
 describe('Name', () => {
@@ -9,12 +9,10 @@ describe('Name', () => {
   });
 
   it('should not be able to create a name with less than 3 characters', () => {
-    expect(() => new Name('J')).toThrow(new InvalidNameLengthError());
+    expect(() => new Name('J')).toThrow(InvalidNameLengthError);
   });
 
   it('should not be able to create a name with more than 240 characters', () => {
-    expect(() => new Name('J'.repeat(241))).toThrow(
-      new InvalidNameLengthError(),
-    );
+    expect(() => new Name('J'.repeat(241))).toThrow(InvalidNameLengthError);
   });
 });

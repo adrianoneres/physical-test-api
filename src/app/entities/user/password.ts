@@ -1,4 +1,4 @@
-import { InvalidPasswordLengthError } from '@errors/InvalidPasswordLengthError';
+import { InvalidPasswordLengthError } from '@errors/invalid-password-length-error';
 
 export class Password {
   private readonly password: string;
@@ -8,7 +8,7 @@ export class Password {
   }
 
   private validatePasswordLenght(password: string): boolean {
-    return !!password && password.length >= 6 && password.length <= 24;
+    return !!password && password.length >= 6 && password.length <= 240;
   }
 
   constructor(password: string) {

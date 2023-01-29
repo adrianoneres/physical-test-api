@@ -16,5 +16,5 @@ model User {
   email    String
   username String
   password String
-  isAdmin  Boolean
+  isAdmin  Boolean @map("is_admin")
 }

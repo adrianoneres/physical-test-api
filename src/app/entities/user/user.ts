@@ -1,3 +1,6 @@
+import { randomUUID } from 'node:crypto';
+
+import { Replace } from 'src/helpers/Replace';
 import { Email } from './email';
 import { Name } from './name';
 import { Password } from './password';
@@ -8,17 +11,23 @@ export interface UserProps {
   email: Email;
   username: Username;
   password: Password;
-  admin: boolean;
+  isAdmin: boolean;
 }
 
 export class User {
+  private _id: string;
   private props: UserProps;
 
-  constructor(props: Omit<UserProps, 'admin'>) {
+  constructor(props: Replace<UserProps, { isAdmin?: boolean }>, id?: string) {
+    this._id = id ?? randomUUID();
     this.props = {
       ...props,
-      admin: false,
+      isAdmin: props.isAdmin ?? false,
     };
+  }
+
+  public get id(): string {
+    return this._id;
   }
 
   public get name(): Name {
@@ -49,7 +58,7 @@ export class User {
     this.props.password = password;
   }
 
-  public get admin(): boolean {
-    return this.props.admin;
+  public get isAdmin(): boolean {
+    return this.props.isAdmin;
   }
 }

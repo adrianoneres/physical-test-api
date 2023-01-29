@@ -1,4 +1,4 @@
-import { InvalidUsernameLengthError } from '@errors/InvalidUsernameLengthError';
+import { InvalidUsernameLengthError } from '@errors/invalid-username-length-error';
 import { Username } from './username';
 
 describe('Username', () => {
@@ -9,12 +9,12 @@ describe('Username', () => {
   });
 
   it('should not be able to create an username with less than 3 characters', () => {
-    expect(() => new Username('j')).toThrow(new InvalidUsernameLengthError());
+    expect(() => new Username('j')).toThrow(InvalidUsernameLengthError);
   });
 
   it('should not be able to create an username with more than 240 characters', () => {
     expect(() => new Username('j'.repeat(241))).toThrow(
-      new InvalidUsernameLengthError(),
+      InvalidUsernameLengthError,
     );
   });
 });

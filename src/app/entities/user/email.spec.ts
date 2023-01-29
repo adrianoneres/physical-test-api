@@ -1,8 +1,8 @@
-import { InvalidEmailDomainError } from '@errors/InvalidEmailDomainError';
-import { InvalidEmailDomainSegmentError } from '@errors/InvalidEmailDomainSegmentError';
-import { InvalidEmailLengthError } from '@errors/InvalidEmailLengthError';
-import { InvalidEmailLocalError } from '@errors/InvalidEmailLocalError';
-import { InvalidEmailPatternError } from '@errors/InvalidEmailPatternError';
+import { InvalidEmailDomainError } from '@errors/invalid-email-domain-error';
+import { InvalidEmailDomainSegmentError } from '@errors/invalid-email-domain-segment-error';
+import { InvalidEmailLengthError } from '@errors/invalid-email-length-error';
+import { InvalidEmailLocalError } from '@errors/invalid-email-local-error';
+import { InvalidEmailPatternError } from '@errors/invalid-email-pattern-error';
 import { Email } from './email';
 
 describe('Email', () => {
@@ -13,18 +13,16 @@ describe('Email', () => {
   });
 
   it('should not be able to create an email with less than 5 characters', () => {
-    expect(() => new Email('j@em')).toThrowError(new InvalidEmailLengthError());
+    expect(() => new Email('j@em')).toThrow(InvalidEmailLengthError);
   });
 
   it('should not be able to create an email with more than 320 characters', () => {
-    expect(() => new Email('j'.repeat(321))).toThrowError(
-      new InvalidEmailLengthError(),
-    );
+    expect(() => new Email('j'.repeat(321))).toThrow(InvalidEmailLengthError);
   });
 
   it('should not be able to create an email with an invalid pattern', () => {
     expect(() => new Email('johndoeemailcom')).toThrow(
-      new InvalidEmailPatternError(),
+      InvalidEmailPatternError,
     );
   });
 
@@ -36,13 +34,13 @@ describe('Email', () => {
 
   it('should not be able to create an email with an email domain with more than 240 characters', () => {
     expect(() => new Email('johndoe@email.' + 'c'.repeat(241))).toThrow(
-      new InvalidEmailDomainError(),
+      InvalidEmailDomainError,
     );
   });
 
   it('should not be able to create an email with segments with more than 63 characters', () => {
     expect(() => new Email('johndoe@email.com.' + 'a'.repeat(64))).toThrow(
-      new InvalidEmailDomainSegmentError(),
+      InvalidEmailDomainSegmentError,
     );
   });
 });

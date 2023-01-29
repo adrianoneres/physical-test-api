@@ -17,11 +17,13 @@
     "strictNullChecks": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
+    "strictPropertyInitialization": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@app/*": ["./src/app/*"],
-      "@errors/*": ["./src/errors/*"],
+      "@config/*": ["./src/config/*"],
+      "@errors/*": ["src/errors/*"],
       "@infra/*": ["./src/infra/*"],
       "@test/*": ["./test/*"]
     }
