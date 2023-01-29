@@ -1,6 +1,5 @@
-import { randomUUID } from 'node:crypto';
-
 import { Replace } from 'src/helpers/Replace';
+import { BaseEntity } from './base-entity';
 import { Email } from './email';
 import { Name } from './name';
 import { Password } from './password';
@@ -14,20 +13,15 @@ export interface UserProps {
   isAdmin: boolean;
 }
 
-export class User {
-  private _id: string;
+export class User extends BaseEntity {
   private props: UserProps;
 
   constructor(props: Replace<UserProps, { isAdmin?: boolean }>, id?: string) {
-    this._id = id ?? randomUUID();
+    super(id);
     this.props = {
       ...props,
       isAdmin: props.isAdmin ?? false,
     };
-  }
-
-  public get id(): string {
-    return this._id;
   }
 
   public get name(): Name {

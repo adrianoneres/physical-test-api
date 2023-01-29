@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
-import { User } from '@app/entities/user/user';
 import { UsersRepository } from '@app/ports/users-repository';
 import { HashProvider } from '@app/ports/hash-provider';
 import { JwtProvider } from '@app/ports/jwt-provider';
 import { InvalidUsernameOrPasswordError } from '@errors/invalid-username-password-error';
+import { User } from '@app/entities/user';
 
 interface SignInRequest {
   username: string;

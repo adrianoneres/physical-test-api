@@ -1,7 +1,7 @@
-import { Email } from './email';
-import { Name } from './name';
 import { Password } from './password';
 import { makeUser } from '@test/factories/user-factory';
+import { Name } from './name';
+import { Email } from './email';
 
 describe('User', () => {
   it('should be able to create an user', async () => {

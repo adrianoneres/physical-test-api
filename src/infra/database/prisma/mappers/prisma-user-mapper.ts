@@ -1,9 +1,9 @@
 import { User as RawUser } from '@prisma/client';
-import { User } from '@app/entities/user/user';
-import { Name } from '@app/entities/user/name';
-import { Email } from '@app/entities/user/email';
-import { Username } from '@app/entities/user/username';
-import { Password } from '@app/entities/user/password';
+import { User } from '@app/entities/user';
+import { Name } from '@app/entities/name';
+import { Email } from '@app/entities/email';
+import { Username } from '@app/entities/username';
+import { Password } from '@app/entities/password';
 
 export class PrismaUserMapper {
   static toPrisma(user: User) {

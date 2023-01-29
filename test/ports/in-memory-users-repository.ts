@@ -1,4 +1,4 @@
-import { User } from '@app/entities/user/user';
+import { User } from '@app/entities/user';
 import { UsersRepository } from '@app/ports/users-repository';
 
 export class InMemoryUsersRepository implements UsersRepository {
