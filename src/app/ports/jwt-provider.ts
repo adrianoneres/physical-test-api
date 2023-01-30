@@ -4,6 +4,6 @@ export interface JwtProps {
 }
 
 export abstract class JwtProvider {
-  abstract generate(data: JwtProps): Promise<string>;
+  abstract generate(props: JwtProps): Promise<string>;
   abstract verify(token: string): Promise<JwtProps>;
 }

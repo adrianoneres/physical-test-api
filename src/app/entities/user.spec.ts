@@ -5,12 +5,12 @@ import { Email } from './email';
 
 describe('User', () => {
   it('should be able to create an user', async () => {
-    const user = await makeUser();
+    const user = await makeUser({ isAdmin: true });
 
     expect(user.name.value).toEqual('John Doe');
     expect(user.email.value).toEqual('johndoe@email.com');
     expect(user.username.value).toEqual('johndoe');
-    expect(user.isAdmin).toEqual(false);
+    expect(user.isAdmin).toEqual(true);
   });
 
   it('should be able set name', async () => {
