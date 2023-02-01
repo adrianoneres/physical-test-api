@@ -1,4 +1,5 @@
 import { User as RawUser } from '@prisma/client';
+
 import { User } from '@app/entities/user';
 import { Name } from '@app/entities/name';
 import { Email } from '@app/entities/email';

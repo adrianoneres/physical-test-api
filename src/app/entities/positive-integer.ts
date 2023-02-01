@@ -10,15 +10,15 @@ export class PositiveInteger {
     return this.integer;
   }
 
-  private validateIntegerValue(integer: number): boolean {
-    return new Decimal(integer).isInteger();
+  private validateIntegerValue(integer: number | null): boolean {
+    return !!integer && new Decimal(integer).isInteger();
   }
 
-  private validateIntegerPositive(integer: number): boolean {
-    return integer > 0;
+  private validateIntegerPositive(integer: number | null): boolean {
+    return !!integer && integer > 0;
   }
 
-  constructor(integer: number) {
+  constructor(integer: number | null) {
     const isIntegerValid = this.validateIntegerValue(integer);
 
     if (!isIntegerValid) {
@@ -31,6 +31,6 @@ export class PositiveInteger {
       throw new InvalidPositiveIntegerError();
     }
 
-    this.integer = integer;
+    this.integer = integer!;
   }
 }

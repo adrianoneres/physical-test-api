@@ -10,7 +10,7 @@ export abstract class PhysicalTestsRepository {
   abstract findByid(id: string): Promise<PhysicalTest | null>;
   abstract findByNameOrDate(
     props: FindByNameAndDateProps,
-  ): Promise<PhysicalTest | null>;
+  ): Promise<PhysicalTest[]>;
   abstract create(physicalTest: PhysicalTest): Promise<void>;
   abstract save(physicalTest: PhysicalTest): Promise<void>;
   abstract delete(id: string): Promise<void>;

@@ -19,14 +19,12 @@ export class InMemoryPhysicalTestsRepository extends PhysicalTestsRepository {
     );
   }
 
-  findByNameOrDate(
-    props: FindByNameAndDateProps,
-  ): Promise<PhysicalTest | null> {
+  findByNameOrDate(props: FindByNameAndDateProps): Promise<PhysicalTest[]> {
     return Promise.resolve(
-      this.physicalTests.find(
+      this.physicalTests.filter(
         item =>
           item.name.value === props.name || item.date.value === props.date,
-      ) || null,
+      ) || [],
     );
   }
 

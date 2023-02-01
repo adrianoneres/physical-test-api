@@ -9,14 +9,14 @@ export class PastDate {
     return this.date;
   }
 
-  private validateDateInPast(date: Date): boolean {
+  private validatePastDate(date: Date): boolean {
     return isPast(date);
   }
 
   constructor(date: Date) {
-    const isDateInPastValid = this.validateDateInPast(date);
+    const isPastDate = this.validatePastDate(date);
 
-    if (!isDateInPastValid) {
+    if (!isPastDate) {
       throw new InvalidPastDateError();
     }
 

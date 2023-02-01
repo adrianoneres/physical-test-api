@@ -10,8 +10,8 @@ export interface PhysicalTestProps {
   name: Name;
   gender: Gender;
   birthdate: PastDate;
-  height?: PositiveDecimal;
-  weight?: PositiveDecimal;
+  height: PositiveDecimal;
+  weight: PositiveDecimal;
   flexibilityFirstAttempt?: PositiveDecimal;
   flexibilitySecondAttempt?: PositiveDecimal;
   flexibilityEvaluator?: Name;
@@ -77,19 +77,19 @@ export class PhysicalTest extends BaseEntity {
     this.props.birthdate = birthdate;
   }
 
-  public get height(): PositiveDecimal | undefined {
+  public get height(): PositiveDecimal {
     return this.props.height;
   }
 
-  public set height(height: PositiveDecimal | undefined) {
+  public set height(height: PositiveDecimal) {
     this.props.height = height;
   }
 
-  public get weight(): PositiveDecimal | undefined {
+  public get weight(): PositiveDecimal {
     return this.props.weight;
   }
 
-  public set weight(weight: PositiveDecimal | undefined) {
+  public set weight(weight: PositiveDecimal) {
     this.props.weight = weight;
   }
 
