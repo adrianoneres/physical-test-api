@@ -64,7 +64,8 @@ export class PrismaPhysicalTestMapper {
         height: new PositiveDecimal(raw.height),
         weight: new PositiveDecimal(raw.weight),
         flexibilityFirstAttempt: new PositiveDecimal(
-          raw.flexibilityFirstAttempt,
+          raw?.flexibilityFirstAttempt,
+          true,
         ),
         flexibilitySecondAttempt: new PositiveDecimal(
           raw.flexibilitySecondAttempt,

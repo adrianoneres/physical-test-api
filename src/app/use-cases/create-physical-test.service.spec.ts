@@ -3,7 +3,7 @@ import { InMemoryPhysicalTestsRepository } from '@test/ports/in-memory-physical-
 import { CreatePhysicalTestService } from './create-physical-test.service';
 
 describe('CreatePhysicalTestService', () => {
-  it('should be able to create a physical tes', async () => {
+  it('should be able to create a physical test', async () => {
     const physicalTest = await makePhysicalTest();
 
     const physicalTestsRepository = new InMemoryPhysicalTestsRepository();

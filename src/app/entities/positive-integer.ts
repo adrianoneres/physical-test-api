@@ -11,15 +11,15 @@ export class PositiveInteger {
     return this.integer;
   }
 
-  private validateIntegerValue(integer?: number): boolean {
+  private validateIntegerValue(integer?: number | null): boolean {
     return !!integer && new Decimal(integer).isInteger();
   }
 
-  private validateIntegerPositive(integer?: number): boolean {
+  private validateIntegerPositive(integer?: number | null): boolean {
     return !!integer && integer > 0;
   }
 
-  constructor(integer?: number, optional = true) {
+  constructor(integer?: number | null, optional = true) {
     if (!optional && !integer) {
       throw new RequiredValueError('integer: required vaule');
     }

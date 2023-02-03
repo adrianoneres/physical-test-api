@@ -8,11 +8,11 @@ export class Name {
     return this.name;
   }
 
-  private validateNameLenght(name?: string): boolean {
+  private validateNameLenght(name?: string | null): boolean {
     return !!name && name.length >= 3 && name.length <= 240;
   }
 
-  constructor(name?: string, optional = true) {
+  constructor(name?: string | null, optional = true) {
     if (!optional && !name) {
       throw new RequiredValueError('name: required vaule');
     }

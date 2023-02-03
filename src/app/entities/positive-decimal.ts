@@ -10,11 +10,11 @@ export class PositiveDecimal {
     return this.decimal;
   }
 
-  private validateDecimalPositive(decimal?: number | Decimal): boolean {
+  private validateDecimalPositive(decimal?: number | Decimal | null): boolean {
     return !!decimal && decimal > 0;
   }
 
-  constructor(decimal?: number | Decimal, optional = true) {
+  constructor(decimal?: number | Decimal | null, optional = true) {
     if (!optional && !decimal) {
       throw new RequiredValueError('decimal: required vaule');
     }

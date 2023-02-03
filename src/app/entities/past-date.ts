@@ -10,11 +10,11 @@ export class PastDate {
     return this.date;
   }
 
-  private validatePastDate(date?: Date): boolean {
+  private validatePastDate(date?: Date | null): boolean {
     return isPast(date!);
   }
 
-  constructor(date?: Date, optional = true) {
+  constructor(date?: Date | null, optional = true) {
     if (!optional && !date) {
       throw new RequiredValueError('date: required vaule');
     }
