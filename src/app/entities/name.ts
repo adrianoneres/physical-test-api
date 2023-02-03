@@ -1,4 +1,5 @@
 import { InvalidNameLengthError } from '@errors/invalid-name-length-error';
+import { RequiredValueError } from '@errors/required-value-error';
 
 export class Name {
   private readonly name: string;
@@ -7,11 +8,15 @@ export class Name {
     return this.name;
   }
 
-  private validateNameLenght(name: string | null): boolean {
+  private validateNameLenght(name?: string): boolean {
     return !!name && name.length >= 3 && name.length <= 240;
   }
 
-  constructor(name: string | null) {
+  constructor(name?: string, optional = true) {
+    if (!optional && !name) {
+      throw new RequiredValueError('name: required vaule');
+    }
+
     const isNameLengthValid = this.validateNameLenght(name);
 
     if (!isNameLengthValid) {

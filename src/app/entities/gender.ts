@@ -1,4 +1,5 @@
 import { InvalidGenderError } from '@errors/invalid-gender-error';
+import { RequiredValueError } from '@errors/required-value-error';
 
 export class Gender {
   private readonly gender: 'M' | 'F';
@@ -7,17 +8,21 @@ export class Gender {
     return this.gender;
   }
 
-  private validateGenderOptions(gender: string): boolean {
-    return ['m', 'f', 'M', 'F'].includes(gender);
+  private validateGenderOptions(gender?: string): boolean {
+    return ['m', 'f', 'M', 'F'].includes(gender!);
   }
 
-  constructor(gender: string) {
+  constructor(gender?: string, optional = true) {
+    if (!optional && !gender) {
+      throw new RequiredValueError('gender: required vaule');
+    }
+
     const isGenderValid = this.validateGenderOptions(gender);
 
     if (!isGenderValid) {
       throw new InvalidGenderError();
     }
 
-    this.gender = gender.toUpperCase() as 'M' | 'F';
+    this.gender = gender!.toUpperCase() as 'M' | 'F';
   }
 }

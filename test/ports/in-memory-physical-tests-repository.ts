@@ -12,8 +12,6 @@ export class InMemoryPhysicalTestsRepository extends PhysicalTestsRepository {
   }
 
   findByid(id: string): Promise<PhysicalTest | null> {
-    console.log('this.physicalTests', this.physicalTests);
-    console.log('id', id);
     return Promise.resolve(
       this.physicalTests.find(item => item.id === id) || null,
     );

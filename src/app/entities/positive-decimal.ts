@@ -1,6 +1,7 @@
 import { Decimal } from 'decimal.js';
 
 import { InvalidPositiveDecimalError } from '@errors/invalid-positive-decimal-error';
+import { RequiredValueError } from '@errors/required-value-error';
 
 export class PositiveDecimal {
   private readonly decimal: number;
@@ -9,12 +10,15 @@ export class PositiveDecimal {
     return this.decimal;
   }
 
-  private validateDecimalPositive(decimal: number | Decimal | null): boolean {
+  private validateDecimalPositive(decimal?: number | Decimal): boolean {
     return !!decimal && decimal > 0;
   }
 
-  constructor(decimal: number | Decimal | null) {
-    console.log('>> is positive decimal?', decimal);
+  constructor(decimal?: number | Decimal, optional = true) {
+    if (!optional && !decimal) {
+      throw new RequiredValueError('decimal: required vaule');
+    }
+
     const isDecimalPositive = this.validateDecimalPositive(decimal);
 
     if (!isDecimalPositive) {

@@ -50,79 +50,64 @@ export class CreatePhysicalTestService {
     request: CreatePhysicalTestRequest,
   ): Promise<CreatePhysicalTestResponse> {
     const physicalTest = new PhysicalTest({
-      date: new PastDate(request.date),
-      name: new Name(request.name),
-      gender: new Gender(request.gender),
-      birthdate: new PastDate(request.birthdate),
-      height: new PositiveDecimal(request.height),
-      weight: new PositiveDecimal(request.weight),
-      flexibilityFirstAttempt: request.flexibility_first_attempt
-        ? new PositiveDecimal(request.flexibility_first_attempt)
-        : undefined,
-      flexibilitySecondAttempt: request.flexibility_second_attempt
-        ? new PositiveDecimal(request.flexibility_second_attempt)
-        : undefined,
-      flexibilityEvaluator: request.flexibility_evaluator
-        ? new Name(request.flexibility_evaluator)
-        : undefined,
-      wingspan: request.wingspan
-        ? new PositiveDecimal(request.wingspan)
-        : undefined,
-      wingspanEvaluator: request.wingspan_evaluator
-        ? new Name(request.wingspan_evaluator)
-        : undefined,
-      strengthResistance: request.strength_resistance
-        ? new PositiveInteger(request.strength_resistance)
-        : undefined,
-      strengthResistanceEvaluator: request.strength_resistance_evaluator
-        ? new Name(request.strength_resistance_evaluator)
-        : undefined,
-      muscularEnduranceFirstAttempt: request.muscular_endurance_first_attempt
-        ? new PositiveInteger(request.muscular_endurance_first_attempt)
-        : undefined,
-      muscularEnduranceSecondAttempt: request.muscular_endurance_second_attempt
-        ? new PositiveInteger(request.muscular_endurance_second_attempt)
-        : undefined,
-      muscularEnduranceEvaluator: request.muscular_endurance_evaluator
-        ? new Name(request.muscular_endurance_evaluator)
-        : undefined,
-      lowerLimbStrengthFirstAttempt: request.lower_limb_strength_first_attempt
-        ? new PositiveDecimal(request.lower_limb_strength_first_attempt)
-        : undefined,
-      lowerLimbStrengthSecondAttempt: request.lower_limb_strength_second_attempt
-        ? new PositiveDecimal(request.lower_limb_strength_second_attempt)
-        : undefined,
-      lowerLimbStrengthEvaluator: request.lower_limb_strength_evaluator
-        ? new Name(request.lower_limb_strength_evaluator)
-        : undefined,
-      upperLimbStrengthFirstAttempt: request.upper_limb_strength_first_attempt
-        ? new PositiveDecimal(request.upper_limb_strength_first_attempt)
-        : undefined,
-      upperLimbStrengthSecondAttempt: request.upper_limb_strength_second_attempt
-        ? new PositiveDecimal(request.upper_limb_strength_second_attempt)
-        : undefined,
-      upperLimbStrengthEvaluator: request.upper_limb_strength_evaluator
-        ? new Name(request.upper_limb_strength_evaluator)
-        : undefined,
-      agilityFirstAttempt: request.agility_first_attempt
-        ? new PositiveDecimal(request.agility_first_attempt)
-        : undefined,
-      agilitySecondAttempt: request.agility_second_attempt
-        ? new PositiveDecimal(request.agility_second_attempt)
-        : undefined,
-      agilityEvaluator: request.agility_evaluator
-        ? new Name(request.agility_evaluator)
-        : undefined,
-      generalResistance: request.general_resistance
-        ? new PositiveDecimal(request.general_resistance)
-        : undefined,
-      generalResistanceEvaluator: request.general_resistance_evaluator
-        ? new Name(request.general_resistance_evaluator)
-        : undefined,
-      speed: request.speed ? new PositiveDecimal(request.speed) : undefined,
-      speedEvaluator: request.speed_evaluator
-        ? new Name(request.speed_evaluator)
-        : undefined,
+      date: new PastDate(request.date, false),
+      name: new Name(request.name, false),
+      gender: new Gender(request.gender, false),
+      birthdate: new PastDate(request.birthdate, false),
+      height: new PositiveDecimal(request.height, false),
+      weight: new PositiveDecimal(request.weight, false),
+      flexibilityFirstAttempt: new PositiveDecimal(
+        request?.flexibility_first_attempt,
+      ),
+      flexibilitySecondAttempt: new PositiveDecimal(
+        request?.flexibility_second_attempt,
+      ),
+      flexibilityEvaluator: new Name(request?.flexibility_evaluator),
+      wingspan: new PositiveDecimal(request?.wingspan),
+      wingspanEvaluator: new Name(request.wingspan_evaluator),
+      strengthResistance: new PositiveInteger(request?.strength_resistance),
+      strengthResistanceEvaluator: new Name(
+        request?.strength_resistance_evaluator,
+      ),
+      muscularEnduranceFirstAttempt: new PositiveInteger(
+        request?.muscular_endurance_first_attempt,
+      ),
+      muscularEnduranceSecondAttempt: new PositiveInteger(
+        request?.muscular_endurance_second_attempt,
+      ),
+      muscularEnduranceEvaluator: new Name(
+        request?.muscular_endurance_evaluator,
+      ),
+      lowerLimbStrengthFirstAttempt: new PositiveDecimal(
+        request?.lower_limb_strength_first_attempt,
+      ),
+      lowerLimbStrengthSecondAttempt: new PositiveDecimal(
+        request?.lower_limb_strength_second_attempt,
+      ),
+      lowerLimbStrengthEvaluator: new Name(
+        request?.lower_limb_strength_evaluator,
+      ),
+      upperLimbStrengthFirstAttempt: new PositiveDecimal(
+        request?.upper_limb_strength_first_attempt,
+      ),
+      upperLimbStrengthSecondAttempt: new PositiveDecimal(
+        request?.upper_limb_strength_second_attempt,
+      ),
+      upperLimbStrengthEvaluator: new Name(
+        request?.upper_limb_strength_evaluator,
+      ),
+      agilityFirstAttempt: new PositiveDecimal(request?.agility_first_attempt),
+      agilitySecondAttempt: new PositiveDecimal(
+        request?.agility_second_attempt,
+      ),
+      agilityEvaluator: new Name(request?.agility_evaluator, true),
+      generalResistance: new PositiveDecimal(request?.general_resistance, true),
+      generalResistanceEvaluator: new Name(
+        request?.general_resistance_evaluator,
+        true,
+      ),
+      speed: new PositiveDecimal(request?.speed, true),
+      speedEvaluator: new Name(request?.speed_evaluator, true),
     });
 
     await this.physicalTestsRepository.create(physicalTest);
