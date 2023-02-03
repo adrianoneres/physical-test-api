@@ -2,7 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
 import { DatabaseModule } from '@infra/database/database.module';
 import { HttpModule } from '@infra/http/http.module';
-import { AuthenticationMiddleware } from '@infra/http/middlewares/authentication-middelware';
+import { AuthenticationMiddleware } from '@infra/http/middlewares/authentication-middleware';
 
 @Module({
   imports: [DatabaseModule, HttpModule],

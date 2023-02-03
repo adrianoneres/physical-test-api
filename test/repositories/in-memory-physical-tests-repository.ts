@@ -36,7 +36,7 @@ export class InMemoryPhysicalTestsRepository extends PhysicalTestsRepository {
       item => item.id === physicalTest.id,
     );
 
-    if (index) {
+    if (index >= 0) {
       this.physicalTests[index] = physicalTest;
     }
 
@@ -46,7 +46,7 @@ export class InMemoryPhysicalTestsRepository extends PhysicalTestsRepository {
   delete(id: string): Promise<void> {
     const index = this.physicalTests.findIndex(item => item.id === id);
 
-    if (index) {
+    if (index >= 0) {
       this.physicalTests.splice(index, 1);
     }
 

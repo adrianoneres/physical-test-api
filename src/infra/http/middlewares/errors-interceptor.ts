@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { catchError, Observable, throwError } from 'rxjs';
 
-import { AppError } from './app-error';
+import { AppError } from '../../../errors/app-error';
 
 export class ErrorsInterceptor implements NestInterceptor {
   intercept(

@@ -8,7 +8,7 @@ interface FindPhysicalTestRequest {
   id: string;
 }
 
-type CreatePhysicalTestResponse = {
+type FindPhysicalTestResponse = {
   physicalTest: {
     date: Date;
     name: string;
@@ -48,7 +48,7 @@ export class FindPhysicalTestService {
 
   async execute({
     id,
-  }: FindPhysicalTestRequest): Promise<CreatePhysicalTestResponse> {
+  }: FindPhysicalTestRequest): Promise<FindPhysicalTestResponse> {
     const physicalTest = await this.physicalTestsRepository.findByid(id);
 
     if (!physicalTest) {

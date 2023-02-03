@@ -1,35 +1,37 @@
 import { PhysicalTestNotFoundError } from '@errors/physical-test-not-found-error';
 import { makePhysicalTest } from '@test/factories/physical-test-factory';
 import { InMemoryPhysicalTestsRepository } from '@test/repositories/in-memory-physical-tests-repository';
-import { FindPhysicalTestService } from './find-physical-test.service';
+import { DeletePhysicalTestService } from './delete-physical-test.service';
 
-describe('FindPhysicalTestService', () => {
-  it('should be able to find a physical test', async () => {
+describe('DeletePhysicalTestService', () => {
+  it('should be able to delete a physical test', async () => {
     const physicalTest = await makePhysicalTest();
 
     const physicalTestsRepository = new InMemoryPhysicalTestsRepository();
     physicalTestsRepository.create(physicalTest);
 
-    const findPhysicalTestService = new FindPhysicalTestService(
+    const deletePhysicalTestService = new DeletePhysicalTestService(
       physicalTestsRepository,
     );
 
-    const registeredPhysicalTest = await findPhysicalTestService.execute({
+    await deletePhysicalTestService.execute({
       id: physicalTest.id,
     });
 
-    expect(registeredPhysicalTest).toBeTruthy();
+    const physicalTests = await physicalTestsRepository.findAll();
+
+    expect(physicalTests.length).toEqual(0);
   });
 
   it('should throw an error when trying to find an unexistent physical test', async () => {
     const physicalTestsRepository = new InMemoryPhysicalTestsRepository();
-    const findPhysicalTestService = new FindPhysicalTestService(
+    const deletePhysicalTestService = new DeletePhysicalTestService(
       physicalTestsRepository,
     );
 
     expect(
       async () =>
-        await findPhysicalTestService.execute({
+        await deletePhysicalTestService.execute({
           id: 'unexistent-id',
         }),
     ).rejects.toThrow(PhysicalTestNotFoundError);

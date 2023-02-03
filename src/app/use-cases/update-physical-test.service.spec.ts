@@ -1,6 +1,6 @@
 import { PhysicalTestNotFoundError } from '@errors/physical-test-not-found-error';
 import { makePhysicalTest } from '@test/factories/physical-test-factory';
-import { InMemoryPhysicalTestsRepository } from '@test/ports/in-memory-physical-tests-repository';
+import { InMemoryPhysicalTestsRepository } from '@test/repositories/in-memory-physical-tests-repository';
 import { UpdatePhysicalTestService } from './update-physical-test.service';
 
 describe('UpdatePhysicalTestService', () => {

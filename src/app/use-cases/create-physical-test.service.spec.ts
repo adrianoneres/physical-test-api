@@ -1,5 +1,5 @@
 import { makePhysicalTest } from '@test/factories/physical-test-factory';
-import { InMemoryPhysicalTestsRepository } from '@test/ports/in-memory-physical-tests-repository';
+import { InMemoryPhysicalTestsRepository } from '@test/repositories/in-memory-physical-tests-repository';
 import { CreatePhysicalTestService } from './create-physical-test.service';
 
 describe('CreatePhysicalTestService', () => {
