@@ -9,6 +9,8 @@ import { AuthenticationMiddleware } from '@infra/http/middlewares/authentication
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthenticationMiddleware).forRoutes('physical-tests');
+    consumer
+      .apply(AuthenticationMiddleware)
+      .forRoutes('calculations', 'physical-tests');
   }
 }
