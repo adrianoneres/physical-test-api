@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from '../prisma.service';
 import {
-  FindByNameAndDateProps,
+  CountProps,
+  FindManyProps,
   PhysicalTestsRepository,
 } from '@app/ports/physical-tests-repository';
 import { PhysicalTest } from '@app/entities/physical-test';
@@ -11,12 +12,46 @@ import { PrismaPhysicalTestMapper } from '../mappers/prisma-physical-test-mapper
 @Injectable()
 export class PrismaPhysicalTestsRepository implements PhysicalTestsRepository {
   constructor(private prismaService: PrismaService) {}
-  async findAll(): Promise<PhysicalTest[]> {
-    const physicalTests = await this.prismaService.physicalTest.findMany();
 
-    if (!physicalTests || physicalTests.length === 0) {
-      return [];
-    }
+  async count({ name, date }: CountProps): Promise<number> {
+    const queryDate = date ? date : { lte: new Date() };
+
+    return this.prismaService.physicalTest.count({
+      where: {
+        name: {
+          contains: name,
+        },
+        date: queryDate,
+      },
+      orderBy: {
+        name: 'asc',
+      },
+    });
+  }
+
+  async findMany({
+    name,
+    date,
+    page,
+    size,
+  }: FindManyProps): Promise<PhysicalTest[]> {
+    const queryPage = !page || page === 0 ? 1 : page;
+    const skip = queryPage === 1 ? undefined : (queryPage - 1) * size;
+    const queryDate = date ? date : { lte: new Date() };
+
+    const physicalTests = await this.prismaService.physicalTest.findMany({
+      take: size,
+      skip,
+      where: {
+        name: {
+          contains: name,
+        },
+        date: queryDate,
+      },
+      orderBy: {
+        name: 'asc',
+      },
+    });
 
     return physicalTests.map(PrismaPhysicalTestMapper.toDomain);
   }
@@ -33,29 +68,6 @@ export class PrismaPhysicalTestsRepository implements PhysicalTestsRepository {
     }
 
     return PrismaPhysicalTestMapper.toDomain(physicalTest);
-  }
-
-  async findByNameOrDate(
-    props: FindByNameAndDateProps,
-  ): Promise<PhysicalTest[]> {
-    const physicalTests = await this.prismaService.physicalTest.findMany({
-      where: {
-        OR: [
-          {
-            name: props.name,
-          },
-          {
-            date: props.date,
-          },
-        ],
-      },
-    });
-
-    if (!physicalTests || physicalTests.length === 0) {
-      return [];
-    }
-
-    return physicalTests.map(PrismaPhysicalTestMapper.toDomain);
   }
 
   async create(physicalTest: PhysicalTest): Promise<void> {

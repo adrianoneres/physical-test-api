@@ -18,7 +18,10 @@ describe('DeletePhysicalTestService', () => {
       id: physicalTest.id,
     });
 
-    const physicalTests = await physicalTestsRepository.findAll();
+    const physicalTests = await physicalTestsRepository.findMany({
+      page: 1,
+      size: 10,
+    });
 
     expect(physicalTests.length).toEqual(0);
   });

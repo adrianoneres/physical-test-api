@@ -54,7 +54,10 @@ describe('CreatePhysicalTestService', () => {
       speed_evaluator: physicalTest.speedEvaluator!.value,
     });
 
-    const physicalTests = await physicalTestsRepository.findAll();
+    const physicalTests = await physicalTestsRepository.findMany({
+      page: 1,
+      size: 10,
+    });
 
     expect(physicalTests.length).toBe(1);
   });

@@ -1,28 +1,24 @@
 import { PhysicalTest } from '@app/entities/physical-test';
 import {
-  FindByNameAndDateProps,
+  CountProps,
+  FindManyProps,
   PhysicalTestsRepository,
 } from '@app/ports/physical-tests-repository';
 
 export class InMemoryPhysicalTestsRepository extends PhysicalTestsRepository {
   public physicalTests: PhysicalTest[] = [];
 
-  findAll(): Promise<PhysicalTest[]> {
+  count(props: CountProps): Promise<number> {
+    return Promise.resolve(this.physicalTests.length);
+  }
+
+  findMany(props: FindManyProps): Promise<PhysicalTest[]> {
     return Promise.resolve(this.physicalTests);
   }
 
   findByid(id: string): Promise<PhysicalTest | null> {
     return Promise.resolve(
       this.physicalTests.find(item => item.id === id) || null,
-    );
-  }
-
-  findByNameOrDate(props: FindByNameAndDateProps): Promise<PhysicalTest[]> {
-    return Promise.resolve(
-      this.physicalTests.filter(
-        item =>
-          item.name.value === props.name || item.date.value === props.date,
-      ) || [],
     );
   }
 
