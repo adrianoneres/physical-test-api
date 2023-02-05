@@ -1,8 +1,8 @@
 import {
   IsDateString,
-  IsDecimal,
   IsInt,
   IsNotEmpty,
+  IsNumber,
   IsOptional,
   Length,
 } from 'class-validator';
@@ -25,19 +25,19 @@ export class UpdatePhysicalTestBody {
   birthdate: string;
 
   @IsNotEmpty()
-  @IsDecimal()
+  @IsNumber({ maxDecimalPlaces: 2 })
   height: number;
 
   @IsNotEmpty()
-  @IsDecimal()
+  @IsNumber({ maxDecimalPlaces: 2 })
   weight: number;
 
   @IsOptional()
-  @IsDecimal()
+  @IsNumber({ maxDecimalPlaces: 2 })
   flexibility_first_attempt: number;
 
   @IsOptional()
-  @IsDecimal()
+  @IsNumber({ maxDecimalPlaces: 2 })
   flexibility_second_attempt: number;
 
   @IsOptional()
@@ -45,7 +45,7 @@ export class UpdatePhysicalTestBody {
   flexibility_evaluator: string;
 
   @IsOptional()
-  @IsDecimal()
+  @IsNumber({ maxDecimalPlaces: 2 })
   wingspan: number;
 
   @IsOptional()
@@ -73,11 +73,11 @@ export class UpdatePhysicalTestBody {
   muscular_endurance_evaluator: string;
 
   @IsOptional()
-  @IsDecimal()
+  @IsNumber({ maxDecimalPlaces: 2 })
   lower_limb_strength_first_attempt: number;
 
   @IsOptional()
-  @IsDecimal()
+  @IsNumber({ maxDecimalPlaces: 2 })
   lower_limb_strength_second_attempt: number;
 
   @IsOptional()
@@ -85,11 +85,11 @@ export class UpdatePhysicalTestBody {
   lower_limb_strength_evaluator: string;
 
   @IsOptional()
-  @IsDecimal()
+  @IsNumber({ maxDecimalPlaces: 2 })
   upper_limb_strength_first_attempt: number;
 
   @IsOptional()
-  @IsDecimal()
+  @IsNumber({ maxDecimalPlaces: 2 })
   upper_limb_strength_second_attempt: number;
 
   @IsOptional()
@@ -97,11 +97,11 @@ export class UpdatePhysicalTestBody {
   upper_limb_strength_evaluator: string;
 
   @IsOptional()
-  @IsDecimal()
+  @IsNumber({ maxDecimalPlaces: 2 })
   agility_first_attempt: number;
 
   @IsOptional()
-  @IsDecimal()
+  @IsNumber({ maxDecimalPlaces: 2 })
   agility_second_attempt: number;
 
   @IsOptional()
@@ -109,7 +109,7 @@ export class UpdatePhysicalTestBody {
   agility_evaluator: string;
 
   @IsOptional()
-  @IsDecimal()
+  @IsNumber({ maxDecimalPlaces: 2 })
   general_resistance: number;
 
   @IsOptional()
@@ -117,7 +117,7 @@ export class UpdatePhysicalTestBody {
   general_resistance_evaluator: string;
 
   @IsOptional()
-  @IsDecimal()
+  @IsNumber({ maxDecimalPlaces: 2 })
   speed: number;
 
   @IsOptional()
