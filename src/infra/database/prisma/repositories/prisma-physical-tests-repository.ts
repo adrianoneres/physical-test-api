@@ -20,6 +20,7 @@ export class PrismaPhysicalTestsRepository implements PhysicalTestsRepository {
       where: {
         name: {
           contains: name,
+          mode: 'insensitive',
         },
         date: queryDate,
       },

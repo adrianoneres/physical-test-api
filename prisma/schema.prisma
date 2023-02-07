@@ -21,6 +21,14 @@ model User {
   @@map("users")
 }
 
+model Institution {
+  id       String  @id
+  name     String
+  isActive Boolean @map("is_active")
+
+  @@map("institutions")
+}
+
 model PhysicalTest {
   id                             String   @id
   date                           DateTime

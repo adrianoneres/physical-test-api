@@ -8,10 +8,12 @@ import {
 export class InMemoryPhysicalTestsRepository extends PhysicalTestsRepository {
   public physicalTests: PhysicalTest[] = [];
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   count(props: CountProps): Promise<number> {
     return Promise.resolve(this.physicalTests.length);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   findMany(props: FindManyProps): Promise<PhysicalTest[]> {
     return Promise.resolve(this.physicalTests);
   }

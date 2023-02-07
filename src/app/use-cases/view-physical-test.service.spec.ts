@@ -1,4 +1,4 @@
-import { PhysicalTestNotFoundError } from '@errors/physical-test-not-found-error';
+import { RegisterNotFoundError } from '@errors/register-not-found-error';
 import { makePhysicalTest } from '@test/factories/physical-test-factory';
 import { InMemoryPhysicalTestsRepository } from '@test/repositories/in-memory-physical-tests-repository';
 import { ViewPhysicalTestService } from './view-physical-test.service';
@@ -32,6 +32,6 @@ describe('ViewPhysicalTestService', () => {
         await viewPhysicalTestService.execute({
           id: 'unexistent-id',
         }),
-    ).rejects.toThrow(PhysicalTestNotFoundError);
+    ).rejects.toThrow(RegisterNotFoundError);
   });
 });

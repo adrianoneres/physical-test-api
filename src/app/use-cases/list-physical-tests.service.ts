@@ -3,14 +3,14 @@ import { Injectable } from '@nestjs/common';
 import { PhysicalTestsRepository } from '@app/ports/physical-tests-repository';
 import { PhysicalTest } from '@app/entities/physical-test';
 
-interface ListPhysicalTestRequest {
+interface ListPhysicalTestsRequest {
   name?: string;
   date?: Date;
   page: number;
   size: number;
 }
 
-type ListPhysicalTestResponse = {
+type ListPhysicalTestsResponse = {
   data: PhysicalTest[];
   pagination: {
     page: number;
@@ -29,7 +29,7 @@ export class ListPhysicalTestsService {
     date,
     page,
     size,
-  }: ListPhysicalTestRequest): Promise<ListPhysicalTestResponse> {
+  }: ListPhysicalTestsRequest): Promise<ListPhysicalTestsResponse> {
     const physicalTests = await this.physicalTestsRepository.findMany({
       name,
       date,

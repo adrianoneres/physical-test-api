@@ -6,7 +6,7 @@ import { Name } from '@app/entities/name';
 import { Gender } from '@app/entities/gender';
 import { PositiveDecimal } from '@app/entities/positive-decimal';
 import { PositiveInteger } from '@app/entities/positive-integer';
-import { PhysicalTestNotFoundError } from '@errors/physical-test-not-found-error';
+import { RegisterNotFoundError } from '@errors/register-not-found-error';
 
 interface UpdatePhysicalTestRequest {
   id: string;
@@ -55,7 +55,7 @@ export class UpdatePhysicalTestService {
     );
 
     if (!physicalTest) {
-      throw new PhysicalTestNotFoundError();
+      throw new RegisterNotFoundError();
     }
 
     physicalTest.date = new PastDate(request.date, false);

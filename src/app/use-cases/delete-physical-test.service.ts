@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { PhysicalTestsRepository } from '@app/ports/physical-tests-repository';
-import { PhysicalTestNotFoundError } from '@errors/physical-test-not-found-error';
+import { RegisterNotFoundError } from '@errors/register-not-found-error';
 
 interface DeletePhysicalTestRequest {
   id: string;
@@ -19,7 +19,7 @@ export class DeletePhysicalTestService {
     const physicalTest = await this.physicalTestsRepository.findByid(id);
 
     if (!physicalTest) {
-      throw new PhysicalTestNotFoundError();
+      throw new RegisterNotFoundError();
     }
 
     await this.physicalTestsRepository.delete(id);

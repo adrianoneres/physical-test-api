@@ -1,4 +1,4 @@
-import { PhysicalTestNotFoundError } from '@errors/physical-test-not-found-error';
+import { RegisterNotFoundError } from '@errors/register-not-found-error';
 import { makePhysicalTest } from '@test/factories/physical-test-factory';
 import { InMemoryPhysicalTestsRepository } from '@test/repositories/in-memory-physical-tests-repository';
 import { UpdatePhysicalTestService } from './update-physical-test.service';
@@ -84,6 +84,6 @@ describe('UpdatePhysicalTestService', () => {
           height: physicalTest.height!.value,
           weight: physicalTest.weight!.value,
         }),
-    ).rejects.toThrow(PhysicalTestNotFoundError);
+    ).rejects.toThrow(RegisterNotFoundError);
   });
 });

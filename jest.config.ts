@@ -8,7 +8,10 @@ const config: Config = {
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
-  collectCoverageFrom: ['<rootDir>/src/app/use-cases/**/*.(t|j)s'],
+  collectCoverageFrom: [
+    '<rootDir>/src/app/entities/**/*.(t|j)s',
+    '<rootDir>/src/app/use-cases/**/*.(t|j)s',
+  ],
   coverageDirectory: './coverage',
   testEnvironment: 'node',
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
