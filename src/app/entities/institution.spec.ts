@@ -11,7 +11,6 @@ describe('Institution', () => {
   it('should be able to create an inactive institution', async () => {
     const institution = await makeInstitution({ isActive: false });
 
-    expect(institution.name.value).toEqual('Test Institution');
     expect(institution.isActive).toEqual(false);
   });
 

@@ -29,6 +29,15 @@ model Institution {
   @@map("institutions")
 }
 
+model Professional {
+  id           String  @id
+  name         String
+  registration String
+  isActive     Boolean @map("is_active")
+
+  @@map("professionals")
+}
+
 model PhysicalTest {
   id                             String   @id
   date                           DateTime

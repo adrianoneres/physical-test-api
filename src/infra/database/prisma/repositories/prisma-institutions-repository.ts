@@ -19,10 +19,8 @@ export class PrismaInstitutionsRepository implements InstitutionsRepository {
         isActive: true,
         name: {
           contains: name,
+          mode: 'insensitive',
         },
-      },
-      orderBy: {
-        name: 'asc',
       },
     });
   }

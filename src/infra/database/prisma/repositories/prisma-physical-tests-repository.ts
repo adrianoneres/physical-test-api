@@ -24,9 +24,6 @@ export class PrismaPhysicalTestsRepository implements PhysicalTestsRepository {
         },
         date: queryDate,
       },
-      orderBy: {
-        name: 'asc',
-      },
     });
   }
 
@@ -46,6 +43,7 @@ export class PrismaPhysicalTestsRepository implements PhysicalTestsRepository {
       where: {
         name: {
           contains: name,
+          mode: 'insensitive',
         },
         date: queryDate,
       },

@@ -11,6 +11,11 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthenticationMiddleware)
-      .forRoutes('calculations', 'institutions', 'physical-tests');
+      .forRoutes(
+        'calculations',
+        'institutions',
+        'professionals',
+        'physical-tests',
+      );
   }
 }
