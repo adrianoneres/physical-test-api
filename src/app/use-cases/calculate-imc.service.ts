@@ -28,7 +28,7 @@ export class CalculateImcService {
       status = 'overweight';
     } else if (imc >= 30 && imc < 40) {
       status = 'obesity';
-    } else if (imc > 40) {
+    } else if (imc >= 40) {
       status = 'severe obesity';
     }
 
