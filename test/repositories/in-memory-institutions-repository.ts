@@ -7,7 +7,9 @@ export class InMemoryInstitutionsRepository extends InstitutionsRepository {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   count(_: CountProps): Promise<number> {
-    return Promise.resolve(this.institutions.length);
+    return Promise.resolve(
+      this.institutions.filter(institution => institution.isActive).length,
+    );
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

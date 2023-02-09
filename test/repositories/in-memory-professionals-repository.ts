@@ -7,7 +7,9 @@ export class InMemoryProfessionalsRepository extends ProfessionalsRepository {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   count(_: CountProps): Promise<number> {
-    return Promise.resolve(this.professionals.length);
+    return Promise.resolve(
+      this.professionals.filter(professional => professional.isActive).length,
+    );
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

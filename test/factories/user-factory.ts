@@ -9,7 +9,7 @@ type Override = Partial<UserProps>;
 
 export async function makeUser(override: Override = {}) {
   const hashAdapter = new BCryptHashAdapter();
-  const passwordHash = await hashAdapter.generate('123456');
+  const passwordHash = await hashAdapter.generate('johndoe123456');
 
   return new User({
     name: new Name('John Doe'),

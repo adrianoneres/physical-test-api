@@ -10,12 +10,16 @@ export class InMemoryPhysicalTestsRepository extends PhysicalTestsRepository {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   count(props: CountProps): Promise<number> {
-    return Promise.resolve(this.physicalTests.length);
+    return Promise.resolve(
+      this.physicalTests.filter(physicalTest => physicalTest.isActive).length,
+    );
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   findMany(props: FindManyProps): Promise<PhysicalTest[]> {
-    return Promise.resolve(this.physicalTests);
+    return Promise.resolve(
+      this.physicalTests.filter(physicalTest => physicalTest.isActive),
+    );
   }
 
   findByid(id: string): Promise<PhysicalTest | null> {
@@ -36,16 +40,6 @@ export class InMemoryPhysicalTestsRepository extends PhysicalTestsRepository {
 
     if (index >= 0) {
       this.physicalTests[index] = physicalTest;
-    }
-
-    return Promise.resolve();
-  }
-
-  delete(id: string): Promise<void> {
-    const index = this.physicalTests.findIndex(item => item.id === id);
-
-    if (index >= 0) {
-      this.physicalTests.splice(index, 1);
     }
 
     return Promise.resolve();

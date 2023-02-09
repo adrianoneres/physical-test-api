@@ -26,6 +26,8 @@ model Institution {
   name     String
   isActive Boolean @map("is_active")
 
+  physicalTests PhysicalTest[]
+
   @@map("institutions")
 }
 
@@ -34,6 +36,8 @@ model Professional {
   name         String
   registration String
   isActive     Boolean @map("is_active")
+
+  physicalTests PhysicalTest[]
 
   @@map("professionals")
 }
@@ -48,27 +52,26 @@ model PhysicalTest {
   weight                         Decimal  @db.Decimal(9, 2)
   flexibilityFirstAttempt        Decimal? @map("flexibility_first_attempt") @db.Decimal(9, 2)
   flexibilitySecondAttempt       Decimal? @map("flexibility_second_attempt") @db.Decimal(9, 2)
-  flexibilityEvaluator           String?  @map("flexibility_evaluator")
   wingspan                       Decimal? @db.Decimal(9, 2)
-  wingspanEvaluator              String?  @map("wingspan_evaluator")
   strengthResistance             Int?     @map("strength_resistance")
-  strengthResistanceEvaluator    String?  @map("strength_resistance_evaluator")
   muscularEnduranceFirstAttempt  Int?     @map("muscular_endurance_first_attempt")
   muscularEnduranceSecondAttempt Int?     @map("muscular_endurance_second_attempt")
-  muscularEnduranceEvaluator     String?  @map("muscular_endurance_evaluator")
   lowerLimbStrengthFirstAttempt  Decimal? @map("lower_limb_strength_first_attempt") @db.Decimal(9, 2)
   lowerLimbStrengthSecondAttempt Decimal? @map("lower_limb_strength_second_attempt") @db.Decimal(9, 2)
-  lowerLimbStrengthEvaluator     String?  @map("lower_limb_strength_evaluator")
   upperLimbStrengthFirstAttempt  Decimal? @map("upper_limb_strength_first_attempt") @db.Decimal(9, 2)
   upperLimbStrengthSecondAttempt Decimal? @map("upper_limb_strength_second_attempt") @db.Decimal(9, 2)
-  upperLimbStrengthEvaluator     String?  @map("upper_limb_strength_evaluator")
   agilityFirstAttempt            Decimal? @map("agility_first_attempt") @db.Decimal(9, 2)
   agilitySecondAttempt           Decimal? @map("agility_second_attempt") @db.Decimal(9, 2)
-  agilityEvaluator               String?  @map("agility_evaluator")
   generalResistance              Decimal? @map("general_resistance") @db.Decimal(9, 2)
-  generalResistanceEvaluator     String?  @map("general_resistance_evaluator")
   speed                          Decimal? @db.Decimal(9, 2)
-  speedEvaluator                 String?  @map("speed_evaluator")
+  isActive                       Boolean  @map("is_active")
+  createdAt                      DateTime @default(now()) @map("created_at")
+
+  institutionId String      @map("institution_id")
+  institution   Institution @relation(fields: [institutionId], references: [id])
+
+  professionalId String       @map("professional_id")
+  professional   Professional @relation(fields: [professionalId], references: [id])
 
   @@map("physical_tests")
 }

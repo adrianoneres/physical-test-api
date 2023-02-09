@@ -1,12 +1,17 @@
+import { Replace } from 'src/helpers/Replace';
 import { BaseEntity } from './base-entity';
 import { Gender } from './gender';
+import { Institution } from './institution';
 import { Name } from './name';
 import { PastDate } from './past-date';
 import { PositiveDecimal } from './positive-decimal';
 import { PositiveInteger } from './positive-integer';
+import { Professional } from './professional';
 
 export interface PhysicalTestProps {
   date: PastDate;
+  institution: Institution;
+  professional: Professional;
   name: Name;
   gender: Gender;
   birthdate: PastDate;
@@ -14,35 +19,30 @@ export interface PhysicalTestProps {
   weight: PositiveDecimal;
   flexibilityFirstAttempt?: PositiveDecimal;
   flexibilitySecondAttempt?: PositiveDecimal;
-  flexibilityEvaluator?: Name;
   wingspan?: PositiveDecimal;
-  wingspanEvaluator?: Name;
   strengthResistance?: PositiveInteger;
-  strengthResistanceEvaluator?: Name;
   muscularEnduranceFirstAttempt?: PositiveInteger;
   muscularEnduranceSecondAttempt?: PositiveInteger;
-  muscularEnduranceEvaluator?: Name;
   lowerLimbStrengthFirstAttempt?: PositiveDecimal;
   lowerLimbStrengthSecondAttempt?: PositiveDecimal;
-  lowerLimbStrengthEvaluator?: Name;
   upperLimbStrengthFirstAttempt?: PositiveDecimal;
   upperLimbStrengthSecondAttempt?: PositiveDecimal;
-  upperLimbStrengthEvaluator?: Name;
   agilityFirstAttempt?: PositiveDecimal;
   agilitySecondAttempt?: PositiveDecimal;
-  agilityEvaluator?: Name;
   generalResistance?: PositiveDecimal;
-  generalResistanceEvaluator?: Name;
   speed?: PositiveDecimal;
-  speedEvaluator?: Name;
+  isActive: boolean;
 }
 
 export class PhysicalTest extends BaseEntity {
   private props: PhysicalTestProps;
 
-  constructor(props: PhysicalTestProps, id?: string) {
+  constructor(
+    props: Replace<PhysicalTestProps, { isActive?: boolean }>,
+    id?: string,
+  ) {
     super(id);
-    this.props = props;
+    this.props = { ...props, isActive: props.isActive ?? true };
   }
 
   public get date(): PastDate {
@@ -51,6 +51,22 @@ export class PhysicalTest extends BaseEntity {
 
   public set date(date: PastDate) {
     this.props.date = date;
+  }
+
+  public get institution(): Institution {
+    return this.props.institution;
+  }
+
+  public set institution(institution: Institution) {
+    this.props.institution = institution;
+  }
+
+  public get professional(): Professional {
+    return this.props.professional;
+  }
+
+  public set professional(professional: Professional) {
+    this.props.professional = professional;
   }
 
   public get name(): Name {
@@ -113,28 +129,12 @@ export class PhysicalTest extends BaseEntity {
     this.props.flexibilitySecondAttempt = flexibilitySecondAttempt;
   }
 
-  public get flexibilityEvaluator(): Name | undefined {
-    return this.props.flexibilityEvaluator;
-  }
-
-  public set flexibilityEvaluator(flexibilityEvaluator: Name | undefined) {
-    this.props.flexibilityEvaluator = flexibilityEvaluator;
-  }
-
   public get wingspan(): PositiveDecimal | undefined {
     return this.props.wingspan;
   }
 
   public set wingspan(wingspan: PositiveDecimal | undefined) {
     this.props.wingspan = wingspan;
-  }
-
-  public get wingspanEvaluator(): Name | undefined {
-    return this.props.wingspanEvaluator;
-  }
-
-  public set wingspanEvaluator(wingspanEvaluator: Name | undefined) {
-    this.props.wingspanEvaluator = wingspanEvaluator;
   }
 
   public get strengthResistance(): PositiveInteger | undefined {
@@ -145,16 +145,6 @@ export class PhysicalTest extends BaseEntity {
     strengthResistance: PositiveInteger | undefined,
   ) {
     this.props.strengthResistance = strengthResistance;
-  }
-
-  public get strengthResistanceEvaluator(): Name | undefined {
-    return this.props.strengthResistanceEvaluator;
-  }
-
-  public set strengthResistanceEvaluator(
-    strengthResistanceEvaluator: Name | undefined,
-  ) {
-    this.props.strengthResistanceEvaluator = strengthResistanceEvaluator;
   }
 
   public get muscularEnduranceFirstAttempt(): PositiveInteger | undefined {
@@ -177,16 +167,6 @@ export class PhysicalTest extends BaseEntity {
     this.props.muscularEnduranceSecondAttempt = muscularEnduranceSecondAttempt;
   }
 
-  public get muscularEnduranceEvaluator(): Name | undefined {
-    return this.props.muscularEnduranceEvaluator;
-  }
-
-  public set muscularEnduranceEvaluator(
-    muscularEnduranceEvaluator: Name | undefined,
-  ) {
-    this.props.muscularEnduranceEvaluator = muscularEnduranceEvaluator;
-  }
-
   public get lowerLimbStrengthFirstAttempt(): PositiveDecimal | undefined {
     return this.props.lowerLimbStrengthFirstAttempt;
   }
@@ -205,16 +185,6 @@ export class PhysicalTest extends BaseEntity {
     lowerLimbStrengthSecondAttempt: PositiveDecimal | undefined,
   ) {
     this.props.lowerLimbStrengthSecondAttempt = lowerLimbStrengthSecondAttempt;
-  }
-
-  public get lowerLimbStrengthEvaluator(): Name | undefined {
-    return this.props.lowerLimbStrengthEvaluator;
-  }
-
-  public set lowerLimbStrengthEvaluator(
-    lowerLimbStrengthEvaluator: Name | undefined,
-  ) {
-    this.props.lowerLimbStrengthEvaluator = lowerLimbStrengthEvaluator;
   }
 
   public get upperLimbStrengthFirstAttempt(): PositiveDecimal | undefined {
@@ -237,16 +207,6 @@ export class PhysicalTest extends BaseEntity {
     this.props.upperLimbStrengthSecondAttempt = upperLimbStrengthSecondAttempt;
   }
 
-  public get upperLimbStrengthEvaluator(): Name | undefined {
-    return this.props.upperLimbStrengthEvaluator;
-  }
-
-  public set upperLimbStrengthEvaluator(
-    upperLimbStrengthEvaluator: Name | undefined,
-  ) {
-    this.props.upperLimbStrengthEvaluator = upperLimbStrengthEvaluator;
-  }
-
   public get agilityFirstAttempt(): PositiveDecimal | undefined {
     return this.props.agilityFirstAttempt;
   }
@@ -267,30 +227,12 @@ export class PhysicalTest extends BaseEntity {
     this.props.agilitySecondAttempt = agilitySecondAttempt;
   }
 
-  public get agilityEvaluator(): Name | undefined {
-    return this.props.agilityEvaluator;
-  }
-
-  public set agilityEvaluator(agilityEvaluator: Name | undefined) {
-    this.props.agilityEvaluator = agilityEvaluator;
-  }
-
   public get generalResistance(): PositiveDecimal | undefined {
     return this.props.generalResistance;
   }
 
   public set generalResistance(generalResistance: PositiveDecimal | undefined) {
     this.props.generalResistance = generalResistance;
-  }
-
-  public get generalResistanceEvaluator(): Name | undefined {
-    return this.props.generalResistanceEvaluator;
-  }
-
-  public set generalResistanceEvaluator(
-    generalResistanceEvaluator: Name | undefined,
-  ) {
-    this.props.generalResistanceEvaluator = generalResistanceEvaluator;
   }
 
   public get speed(): PositiveDecimal | undefined {
@@ -301,11 +243,11 @@ export class PhysicalTest extends BaseEntity {
     this.props.speed = speed;
   }
 
-  public get speedEvaluator(): Name | undefined {
-    return this.props.speedEvaluator;
+  public get isActive(): boolean {
+    return this.props.isActive;
   }
 
-  public set speedEvaluator(speedEvaluator: Name | undefined) {
-    this.props.speedEvaluator = speedEvaluator;
+  public set isActive(isActive: boolean) {
+    this.props.isActive = isActive;
   }
 }

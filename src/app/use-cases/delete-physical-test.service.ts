@@ -22,6 +22,8 @@ export class DeletePhysicalTestService {
       throw new RegisterNotFoundError();
     }
 
-    await this.physicalTestsRepository.delete(id);
+    physicalTest.isActive = false;
+
+    await this.physicalTestsRepository.save(physicalTest);
   }
 }

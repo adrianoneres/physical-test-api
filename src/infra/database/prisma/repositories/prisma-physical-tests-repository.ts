@@ -18,6 +18,7 @@ export class PrismaPhysicalTestsRepository implements PhysicalTestsRepository {
 
     return this.prismaService.physicalTest.count({
       where: {
+        isActive: true,
         name: {
           contains: name,
           mode: 'insensitive',
@@ -40,7 +41,12 @@ export class PrismaPhysicalTestsRepository implements PhysicalTestsRepository {
     const physicalTests = await this.prismaService.physicalTest.findMany({
       take: size,
       skip,
+      include: {
+        institution: true,
+        professional: true,
+      },
       where: {
+        isActive: true,
         name: {
           contains: name,
           mode: 'insensitive',
@@ -52,11 +58,21 @@ export class PrismaPhysicalTestsRepository implements PhysicalTestsRepository {
       },
     });
 
-    return physicalTests.map(PrismaPhysicalTestMapper.toDomain);
+    return physicalTests.map(physicalTest =>
+      PrismaPhysicalTestMapper.toDomain(
+        physicalTest,
+        physicalTest.institution,
+        physicalTest.professional,
+      ),
+    );
   }
 
   async findByid(id: string): Promise<PhysicalTest | null> {
     const physicalTest = await this.prismaService.physicalTest.findUnique({
+      include: {
+        institution: true,
+        professional: true,
+      },
       where: {
         id,
       },
@@ -66,7 +82,11 @@ export class PrismaPhysicalTestsRepository implements PhysicalTestsRepository {
       return null;
     }
 
-    return PrismaPhysicalTestMapper.toDomain(physicalTest);
+    return PrismaPhysicalTestMapper.toDomain(
+      physicalTest,
+      physicalTest.institution,
+      physicalTest.professional,
+    );
   }
 
   async create(physicalTest: PhysicalTest): Promise<void> {

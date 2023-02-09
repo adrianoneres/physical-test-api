@@ -33,8 +33,9 @@ export class SignInService {
       throw new InvalidUsernameOrPasswordError();
     }
 
+    const userPassword = username + password;
     const isPasswordMatches = await this.hashProvider.compare(
-      password,
+      userPassword,
       user.password.value,
     );
 

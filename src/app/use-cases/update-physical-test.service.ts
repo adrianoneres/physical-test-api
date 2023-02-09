@@ -7,9 +7,13 @@ import { Gender } from '@app/entities/gender';
 import { PositiveDecimal } from '@app/entities/positive-decimal';
 import { PositiveInteger } from '@app/entities/positive-integer';
 import { RegisterNotFoundError } from '@errors/register-not-found-error';
+import { InstitutionsRepository } from '@app/ports/institutions-repository';
+import { ProfessionalsRepository } from '@app/ports/professionals-repository';
 
 interface UpdatePhysicalTestRequest {
   id: string;
+  institution_id: string;
+  professional_id: string;
   date: Date;
   name: string;
   gender: string;
@@ -18,34 +22,29 @@ interface UpdatePhysicalTestRequest {
   weight: number;
   flexibility_first_attempt?: number;
   flexibility_second_attempt?: number;
-  flexibility_evaluator?: string;
   wingspan?: number;
-  wingspan_evaluator?: string;
   strength_resistance?: number;
-  strength_resistance_evaluator?: string;
   muscular_endurance_first_attempt?: number;
   muscular_endurance_second_attempt?: number;
-  muscular_endurance_evaluator?: string;
   lower_limb_strength_first_attempt?: number;
   lower_limb_strength_second_attempt?: number;
-  lower_limb_strength_evaluator?: string;
   upper_limb_strength_first_attempt?: number;
   upper_limb_strength_second_attempt?: number;
-  upper_limb_strength_evaluator?: string;
   agility_first_attempt?: number;
   agility_second_attempt?: number;
-  agility_evaluator?: string;
   general_resistance?: number;
-  general_resistance_evaluator?: string;
   speed?: number;
-  speed_evaluator?: string;
 }
 
 type UpdatePhysicalTestResponse = void;
 
 @Injectable()
 export class UpdatePhysicalTestService {
-  constructor(private physicalTestsRepository: PhysicalTestsRepository) {}
+  constructor(
+    private physicalTestsRepository: PhysicalTestsRepository,
+    private institutionsRepository: InstitutionsRepository,
+    private professionalsRepository: ProfessionalsRepository,
+  ) {}
 
   async execute(
     request: UpdatePhysicalTestRequest,
@@ -58,7 +57,25 @@ export class UpdatePhysicalTestService {
       throw new RegisterNotFoundError();
     }
 
+    const institution = await this.institutionsRepository.findByid(
+      request.institution_id,
+    );
+
+    if (!institution) {
+      throw new RegisterNotFoundError('institution: not found');
+    }
+
+    const professional = await this.professionalsRepository.findByid(
+      request.professional_id,
+    );
+
+    if (!professional) {
+      throw new RegisterNotFoundError('professional: not found');
+    }
+
     physicalTest.date = new PastDate(request.date, false);
+    physicalTest.institution = institution;
+    physicalTest.professional = professional;
     physicalTest.name = new Name(request.name, false);
     physicalTest.gender = new Gender(request.gender, false);
     physicalTest.birthdate = new PastDate(request.birthdate, false);
@@ -70,16 +87,9 @@ export class UpdatePhysicalTestService {
     physicalTest.flexibilitySecondAttempt = new PositiveDecimal(
       request?.flexibility_second_attempt,
     );
-    physicalTest.flexibilityEvaluator = new Name(
-      request?.flexibility_evaluator,
-    );
     physicalTest.wingspan = new PositiveDecimal(request?.wingspan);
-    physicalTest.wingspanEvaluator = new Name(request.wingspan_evaluator);
     physicalTest.strengthResistance = new PositiveInteger(
       request?.strength_resistance,
-    );
-    physicalTest.strengthResistanceEvaluator = new Name(
-      request?.strength_resistance_evaluator,
     );
     physicalTest.muscularEnduranceFirstAttempt = new PositiveInteger(
       request?.muscular_endurance_first_attempt,
@@ -87,17 +97,11 @@ export class UpdatePhysicalTestService {
     physicalTest.muscularEnduranceSecondAttempt = new PositiveInteger(
       request?.muscular_endurance_second_attempt,
     );
-    physicalTest.muscularEnduranceEvaluator = new Name(
-      request?.muscular_endurance_evaluator,
-    );
     physicalTest.lowerLimbStrengthFirstAttempt = new PositiveDecimal(
       request?.lower_limb_strength_first_attempt,
     );
     physicalTest.lowerLimbStrengthSecondAttempt = new PositiveDecimal(
       request?.lower_limb_strength_second_attempt,
-    );
-    physicalTest.lowerLimbStrengthEvaluator = new Name(
-      request?.lower_limb_strength_evaluator,
     );
     physicalTest.upperLimbStrengthFirstAttempt = new PositiveDecimal(
       request?.upper_limb_strength_first_attempt,
@@ -105,26 +109,17 @@ export class UpdatePhysicalTestService {
     physicalTest.upperLimbStrengthSecondAttempt = new PositiveDecimal(
       request?.upper_limb_strength_second_attempt,
     );
-    physicalTest.upperLimbStrengthEvaluator = new Name(
-      request?.upper_limb_strength_evaluator,
-    );
     physicalTest.agilityFirstAttempt = new PositiveDecimal(
       request?.agility_first_attempt,
     );
     physicalTest.agilitySecondAttempt = new PositiveDecimal(
       request?.agility_second_attempt,
     );
-    physicalTest.agilityEvaluator = new Name(request?.agility_evaluator, true);
     physicalTest.generalResistance = new PositiveDecimal(
       request?.general_resistance,
       true,
     );
-    physicalTest.generalResistanceEvaluator = new Name(
-      request?.general_resistance_evaluator,
-      true,
-    );
     physicalTest.speed = new PositiveDecimal(request?.speed, true);
-    physicalTest.speedEvaluator = new Name(request?.speed_evaluator, true);
 
     await this.physicalTestsRepository.save(physicalTest);
   }
