@@ -46,6 +46,8 @@ export class SignInService {
     const token = await this.jwtProvider.generate({
       id: user.id,
       name: user.name.value,
+      email: user.email.value,
+      username: user.username.value,
     });
 
     return { access_token: token, user };

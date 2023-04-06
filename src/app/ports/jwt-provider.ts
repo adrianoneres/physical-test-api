@@ -1,6 +1,8 @@
 export interface JwtProps {
   id: string;
   name: string;
+  email: string;
+  username: string;
 }
 
 export abstract class JwtProvider {
