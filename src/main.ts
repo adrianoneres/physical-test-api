@@ -7,6 +7,7 @@ async function bootstrap() {
 
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
+  app.setGlobalPrefix('/physical-test');
 
   const port = process.env.PORT || 5000;
   await app.listen(port);
