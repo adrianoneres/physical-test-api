@@ -16,7 +16,7 @@ export class Registration {
 
   constructor(registration?: string | null, optional = true) {
     if (!optional && !registration) {
-      throw new RequiredValueError('registration: required vaule');
+      throw new RequiredValueError('registration: required value');
     }
 
     const isRegistrationLengthValid =

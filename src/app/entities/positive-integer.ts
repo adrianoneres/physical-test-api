@@ -12,19 +12,24 @@ export class PositiveInteger {
   }
 
   private validateIntegerValue(integer?: number | null): boolean {
-    return !!integer && new Decimal(integer).isInteger();
+    return (
+      integer !== undefined &&
+      integer !== null &&
+      new Decimal(integer).isInteger()
+    );
   }
 
   private validateIntegerPositive(integer?: number | null): boolean {
-    return !!integer && integer > 0;
+    return integer != undefined && integer != null && integer >= 0;
   }
 
   constructor(integer?: number | null, optional = true) {
     if (!optional && !integer) {
-      throw new RequiredValueError('integer: required vaule');
+      throw new RequiredValueError('integer: required value');
     }
 
     const isIntegerValid = this.validateIntegerValue(integer);
+    console.log(isIntegerValid);
 
     if (!isIntegerValid) {
       throw new InvalidIntegerError();

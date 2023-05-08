@@ -2,14 +2,16 @@ import { PhysicalTest } from '@app/entities/physical-test';
 
 export interface FindManyProps {
   name?: string;
-  date?: Date;
+  dateFrom?: Date;
+  dateTo?: Date;
   page: number;
   size: number;
 }
 
 export interface CountProps {
   name?: string;
-  date?: Date;
+  dateFrom?: Date;
+  dateTo?: Date;
 }
 
 export abstract class PhysicalTestsRepository {

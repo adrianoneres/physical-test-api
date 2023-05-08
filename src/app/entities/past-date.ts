@@ -16,7 +16,7 @@ export class PastDate {
 
   constructor(date?: Date | null, optional = true) {
     if (!optional && !date) {
-      throw new RequiredValueError('date: required vaule');
+      throw new RequiredValueError('date: required value');
     }
 
     const isPastDate = this.validatePastDate(date);

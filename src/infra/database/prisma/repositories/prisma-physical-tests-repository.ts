@@ -8,13 +8,15 @@ import {
 } from '@app/ports/physical-tests-repository';
 import { PhysicalTest } from '@app/entities/physical-test';
 import { PrismaPhysicalTestMapper } from '../mappers/prisma-physical-test-mapper';
+import { endOfYear, startOfYear } from 'date-fns';
 
 @Injectable()
 export class PrismaPhysicalTestsRepository implements PhysicalTestsRepository {
   constructor(private prismaService: PrismaService) {}
 
-  async count({ name, date }: CountProps): Promise<number> {
-    const queryDate = date ? date : { lte: new Date() };
+  async count({ name, dateFrom, dateTo }: CountProps): Promise<number> {
+    const queryDateFrom = !!dateFrom ? dateFrom : startOfYear(new Date());
+    const queryDateTo = !!dateTo ? dateTo : endOfYear(new Date());
 
     return this.prismaService.physicalTest.count({
       where: {
@@ -23,20 +25,25 @@ export class PrismaPhysicalTestsRepository implements PhysicalTestsRepository {
           contains: name,
           mode: 'insensitive',
         },
-        date: queryDate,
+        date: {
+          gte: queryDateFrom,
+          lte: queryDateTo,
+        },
       },
     });
   }
 
   async findMany({
     name,
-    date,
+    dateFrom,
+    dateTo,
     page,
     size,
   }: FindManyProps): Promise<PhysicalTest[]> {
     const queryPage = !page || page === 0 ? 1 : page;
     const skip = queryPage === 1 ? undefined : (queryPage - 1) * size;
-    const queryDate = date ? date : { lte: new Date() };
+    const queryDateFrom = !!dateFrom ? dateFrom : startOfYear(new Date());
+    const queryDateTo = !!dateTo ? dateTo : endOfYear(new Date());
 
     const physicalTests = await this.prismaService.physicalTest.findMany({
       take: size,
@@ -51,10 +58,13 @@ export class PrismaPhysicalTestsRepository implements PhysicalTestsRepository {
           contains: name,
           mode: 'insensitive',
         },
-        date: queryDate,
+        date: {
+          gte: queryDateFrom,
+          lte: queryDateTo,
+        },
       },
       orderBy: {
-        name: 'asc',
+        date: 'desc',
       },
     });
 

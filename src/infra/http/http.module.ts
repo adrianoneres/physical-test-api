@@ -17,6 +17,7 @@ import { ViewProfessionalService } from '@app/use-cases/view-professional.servic
 import { CreateProfessionalService } from '@app/use-cases/create-professional.service';
 import { UpdateProfessionalService } from '@app/use-cases/update-professional.service';
 import { DeleteProfessionalService } from '@app/use-cases/delete-professional.service';
+import { CalculatePhysicalTestResultsService } from '@app/use-cases/calculate-physical-test-results.service';
 import { ListPhysicalTestsService } from '@app/use-cases/list-physical-tests.service';
 import { CreatePhysicalTestService } from '@app/use-cases/create-physical-test.service';
 import { ViewPhysicalTestService } from '@app/use-cases/view-physical-test.service';
@@ -48,6 +49,7 @@ import { JwtModule } from '@infra/jwt/jwt.module';
     CreateProfessionalService,
     UpdateProfessionalService,
     DeleteProfessionalService,
+    CalculatePhysicalTestResultsService,
     ListPhysicalTestsService,
     ViewPhysicalTestService,
     CreatePhysicalTestService,

@@ -14,7 +14,7 @@ export class Gender {
 
   constructor(gender?: string, optional = true) {
     if (!optional && !gender) {
-      throw new RequiredValueError('gender: required vaule');
+      throw new RequiredValueError('gender: required value');
     }
 
     const isGenderValid = this.validateGenderOptions(gender);

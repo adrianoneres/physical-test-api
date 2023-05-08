@@ -14,7 +14,7 @@ export class Name {
 
   constructor(name?: string | null, optional = true) {
     if (!optional && !name) {
-      throw new RequiredValueError('name: required vaule');
+      throw new RequiredValueError('name: required value');
     }
 
     const isNameLengthValid = this.validateNameLenght(name);

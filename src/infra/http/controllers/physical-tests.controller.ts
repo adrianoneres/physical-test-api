@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { parseISO } from 'date-fns';
 
+import { CalculatePhysicalTestResultsService } from '@app/use-cases/calculate-physical-test-results.service';
 import { CreatePhysicalTestService } from '@app/use-cases/create-physical-test.service';
 import { UpdatePhysicalTestService } from '@app/use-cases/update-physical-test.service';
 import { ViewPhysicalTestService } from '@app/use-cases/view-physical-test.service';
@@ -23,6 +24,7 @@ import { ListPhysicalTestsService } from '@app/use-cases/list-physical-tests.ser
 export class PhysicalTestsController {
   constructor(
     private readonly listPhysicalTestsService: ListPhysicalTestsService,
+    private readonly calculatePhysicalTestsResultsService: CalculatePhysicalTestResultsService,
     private readonly viewPhysicalTestService: ViewPhysicalTestService,
     private readonly createPhysicalTestService: CreatePhysicalTestService,
     private readonly updatePhysicalTestService: UpdatePhysicalTestService,
@@ -32,13 +34,15 @@ export class PhysicalTestsController {
   @Get()
   async list(
     @Query('name') name: string,
-    @Query('date') date: string,
+    @Query('dateFrom') dateFrom: string,
+    @Query('dateTo') dateTo: string,
     @Query('page') page: number,
     @Query('size') size: number,
   ) {
     const { data, pagination } = await this.listPhysicalTestsService.execute({
       name,
-      date: !!date ? parseISO(date) : undefined,
+      dateFrom: !!dateFrom ? parseISO(dateFrom) : undefined,
+      dateTo: !!dateTo ? parseISO(dateTo) : undefined,
       page: !!page ? Number(page) : 1,
       size: !!size ? Number(size) : 10,
     });
@@ -46,6 +50,29 @@ export class PhysicalTestsController {
     return {
       data: data.map(PhysicalTestViewModel.toHttp),
       pagination,
+    };
+  }
+
+  @Get('/results/calculate')
+  async calculateResults(
+    @Query('name') name: string,
+    @Query('dateFrom') dateFrom: string,
+    @Query('dateTo') dateTo: string,
+  ) {
+    const { data } = await this.calculatePhysicalTestsResultsService.execute({
+      name,
+      dateFrom: !!dateFrom ? parseISO(dateFrom) : undefined,
+      dateTo: !!dateTo ? parseISO(dateTo) : undefined,
+    });
+
+    return {
+      data: data.map(item => {
+        return {
+          id: item.id,
+          physicalTest: PhysicalTestViewModel.toHttp(item.physicalTest),
+          results: item.results,
+        };
+      }),
     };
   }
 

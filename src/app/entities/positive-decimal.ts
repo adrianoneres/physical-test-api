@@ -11,12 +11,18 @@ export class PositiveDecimal {
   }
 
   private validateDecimalPositive(decimal?: number | Decimal | null): boolean {
-    return !!decimal && decimal > 0;
+    if (decimal === null || decimal === undefined) return false;
+
+    if (decimal instanceof Decimal) {
+      return decimal.gte(0);
+    }
+
+    return decimal >= 0;
   }
 
   constructor(decimal?: number | Decimal | null, optional = true) {
     if (!optional && !decimal) {
-      throw new RequiredValueError('decimal: required vaule');
+      throw new RequiredValueError('decimal: required value');
     }
 
     const isDecimalPositive = this.validateDecimalPositive(decimal);
