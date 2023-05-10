@@ -110,6 +110,8 @@ export class PrismaPhysicalTestsRepository implements PhysicalTestsRepository {
   async save(physicalTest: PhysicalTest): Promise<void> {
     const raw = PrismaPhysicalTestMapper.toPrisma(physicalTest);
 
+    console.log('>> save raw', raw);
+
     await this.prismaService.physicalTest.update({
       where: {
         id: raw.id,
