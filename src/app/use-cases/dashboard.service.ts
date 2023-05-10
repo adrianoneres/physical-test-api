@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
-import { UsersRepository } from '@app/ports/users-repository';
 import { ProfessionalsRepository } from '@app/ports/professionals-repository';
 import { InstitutionsRepository } from '@app/ports/institutions-repository';
+import { PhysicalTestsRepository } from '@app/ports/physical-tests-repository';
 
 type DashboardResponse = {
   countProfessionals: number;
@@ -15,7 +15,7 @@ export class DashboardService {
   constructor(
     private professionalsRepository: ProfessionalsRepository,
     private institutionsRepository: InstitutionsRepository,
-    private usersRepository: UsersRepository,
+    private physicalTestsRepository: PhysicalTestsRepository,
   ) {}
 
   async execute(): Promise<DashboardResponse> {
@@ -23,7 +23,7 @@ export class DashboardService {
       await Promise.all([
         this.professionalsRepository.count({}),
         this.institutionsRepository.count({}),
-        this.usersRepository.count({}),
+        this.physicalTestsRepository.count({}),
       ]);
 
     return {
