@@ -8,7 +8,6 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { parseISO } from 'date-fns';
 
 import { CalculatePhysicalTestResultsService } from '@app/use-cases/calculate-physical-test-results.service';
 import { CreatePhysicalTestService } from '@app/use-cases/create-physical-test.service';
@@ -41,8 +40,8 @@ export class PhysicalTestsController {
   ) {
     const { data, pagination } = await this.listPhysicalTestsService.execute({
       name,
-      dateFrom: !!dateFrom ? parseISO(dateFrom) : undefined,
-      dateTo: !!dateTo ? parseISO(dateTo) : undefined,
+      dateFrom: !!dateFrom ? new Date(dateFrom) : undefined,
+      dateTo: !!dateTo ? new Date(dateTo) : undefined,
       page: !!page ? Number(page) : 1,
       size: !!size ? Number(size) : 10,
     });
@@ -61,8 +60,8 @@ export class PhysicalTestsController {
   ) {
     const { data } = await this.calculatePhysicalTestsResultsService.execute({
       name,
-      dateFrom: !!dateFrom ? parseISO(dateFrom) : undefined,
-      dateTo: !!dateTo ? parseISO(dateTo) : undefined,
+      dateFrom: !!dateFrom ? new Date(dateFrom) : undefined,
+      dateTo: !!dateTo ? new Date(dateTo) : undefined,
     });
 
     return {
@@ -87,8 +86,8 @@ export class PhysicalTestsController {
   async create(@Body() body: CreatePhysicalTestBody) {
     await this.createPhysicalTestService.execute({
       ...body,
-      date: parseISO(body.date),
-      birthdate: parseISO(body.birthdate),
+      date: new Date(body.date),
+      birthdate: new Date(body.birthdate),
     });
   }
 
@@ -97,8 +96,8 @@ export class PhysicalTestsController {
     await this.updatePhysicalTestService.execute({
       ...body,
       id,
-      date: parseISO(body.date),
-      birthdate: parseISO(body.birthdate),
+      date: new Date(body.date),
+      birthdate: new Date(body.birthdate),
     });
   }
 
