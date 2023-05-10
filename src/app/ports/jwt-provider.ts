@@ -3,6 +3,7 @@ export interface JwtProps {
   name: string;
   email: string;
   username: string;
+  isAdmin: boolean;
 }
 
 export abstract class JwtProvider {

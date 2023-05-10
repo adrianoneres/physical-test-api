@@ -48,6 +48,7 @@ export class SignInService {
       name: user.name.value,
       email: user.email.value,
       username: user.username.value,
+      isAdmin: user.isAdmin,
     });
 
     return { access_token: token, user };

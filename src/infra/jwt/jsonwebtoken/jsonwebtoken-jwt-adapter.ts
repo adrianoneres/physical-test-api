@@ -12,6 +12,7 @@ interface TokenProps {
   name: string;
   email: string;
   username: string;
+  isAdmin: boolean;
 }
 
 @Injectable()
@@ -37,13 +38,14 @@ export class JsonwebtokenJwtAdapter implements JwtProvider {
       const { secret } = auth;
 
       const decoded = verify(token, secret as Secret);
-      const { sub, name, email, username } = decoded as TokenProps;
+      const { sub, name, email, username, isAdmin } = decoded as TokenProps;
 
       return {
         id: sub,
         name,
         email,
         username,
+        isAdmin,
       };
     } catch (error) {
       throw new InvalidTokenError();
