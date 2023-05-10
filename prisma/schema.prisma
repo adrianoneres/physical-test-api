@@ -44,10 +44,10 @@ model Professional {
 
 model PhysicalTest {
   id                             String   @id
-  date                           DateTime
+  date                           DateTime @db.Date
   name                           String
   gender                         String
-  birthdate                      DateTime
+  birthdate                      DateTime @db.Date
   height                         Decimal  @db.Decimal(9, 2)
   weight                         Decimal  @db.Decimal(9, 2)
   flexibilityFirstAttempt        Decimal? @map("flexibility_first_attempt") @db.Decimal(9, 2)
