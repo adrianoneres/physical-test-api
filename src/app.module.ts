@@ -12,7 +12,7 @@ export class AppModule implements NestModule {
     consumer
       .apply(AuthenticationMiddleware)
       .forRoutes(
-        'calculations',
+        'dashboard',
         'institutions',
         'professionals',
         'physical-tests',

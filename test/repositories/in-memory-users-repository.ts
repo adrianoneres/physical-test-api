@@ -1,9 +1,14 @@
 import { Password } from '@app/entities/password';
 import { User } from '@app/entities/user';
-import { UsersRepository } from '@app/ports/users-repository';
+import { CountProps, UsersRepository } from '@app/ports/users-repository';
 
 export class InMemoryUsersRepository implements UsersRepository {
   public users: User[] = [];
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  count(_: CountProps): Promise<number> {
+    return Promise.resolve(this.users.length);
+  }
 
   async findById(id: string): Promise<User | null> {
     return this.users.find(user => user.id === id) || null;

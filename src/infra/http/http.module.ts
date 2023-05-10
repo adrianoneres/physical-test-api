@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 
 import { SignInController } from './controllers/sign-in.controller';
+import { DashboardController } from './controllers/dashboard.controller';
 import { InstitutionsController } from './controllers/institutions.controller';
 import { ProfessionalsController } from './controllers/professionals.controller';
 import { PhysicalTestsController } from './controllers/physical-tests.controller';
 import { UsersController } from './controllers/users.controller';
 import { SignInService } from '@app/use-cases/sign-in.service';
+import { DashboardService } from '@app/use-cases/dashboard.service';
 import { ListInstitutionsService } from '@app/use-cases/list-institutions.service';
 import { ViewInstitutionService } from '@app/use-cases/view-institution.service';
 import { CreateInstitutionService } from '@app/use-cases/create-institution.service';
@@ -32,6 +34,7 @@ import { JwtModule } from '@infra/jwt/jwt.module';
   imports: [DatabaseModule, HashModule, JwtModule],
   controllers: [
     SignInController,
+    DashboardController,
     InstitutionsController,
     ProfessionalsController,
     PhysicalTestsController,
@@ -39,6 +42,7 @@ import { JwtModule } from '@infra/jwt/jwt.module';
   ],
   providers: [
     SignInService,
+    DashboardService,
     ListInstitutionsService,
     ViewInstitutionService,
     CreateInstitutionService,
