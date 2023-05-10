@@ -1,12 +1,10 @@
 import { Module } from '@nestjs/common';
 
 import { SignInController } from './controllers/sign-in.controller';
-import { CalculationsController } from './controllers/calculations.controller';
 import { InstitutionsController } from './controllers/institutions.controller';
 import { ProfessionalsController } from './controllers/professionals.controller';
 import { PhysicalTestsController } from './controllers/physical-tests.controller';
 import { SignInService } from '@app/use-cases/sign-in.service';
-import { CalculateImcService } from '@app/use-cases/calculate-imc.service';
 import { ListInstitutionsService } from '@app/use-cases/list-institutions.service';
 import { ViewInstitutionService } from '@app/use-cases/view-institution.service';
 import { CreateInstitutionService } from '@app/use-cases/create-institution.service';
@@ -31,14 +29,12 @@ import { JwtModule } from '@infra/jwt/jwt.module';
   imports: [DatabaseModule, HashModule, JwtModule],
   controllers: [
     SignInController,
-    CalculationsController,
     InstitutionsController,
     ProfessionalsController,
     PhysicalTestsController,
   ],
   providers: [
     SignInService,
-    CalculateImcService,
     ListInstitutionsService,
     ViewInstitutionService,
     CreateInstitutionService,
