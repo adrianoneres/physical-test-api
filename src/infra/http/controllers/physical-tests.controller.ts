@@ -93,8 +93,6 @@ export class PhysicalTestsController {
 
   @Put('/:id')
   async update(@Param('id') id: string, @Body() body: UpdatePhysicalTestBody) {
-    console.log('>> date', new Date(body.date));
-    console.log('>> birthdate', new Date(body.birthdate));
     await this.updatePhysicalTestService.execute({
       ...body,
       id,

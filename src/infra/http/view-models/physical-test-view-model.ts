@@ -1,10 +1,12 @@
+import { format } from 'date-fns';
+
 import { PhysicalTest } from '@app/entities/physical-test';
 
 export class PhysicalTestViewModel {
   static toHttp(physicalTest: PhysicalTest) {
     return {
       id: physicalTest.id,
-      date: physicalTest.date.value,
+      date: format(physicalTest.date.value, 'yyyy-MM-dd'),
       institution: {
         id: physicalTest.institution.id,
         name: physicalTest.institution.name.value,
@@ -16,7 +18,7 @@ export class PhysicalTestViewModel {
       },
       name: physicalTest.name.value,
       gender: physicalTest.gender.value,
-      birthdate: physicalTest.birthdate.value,
+      birthdate: format(physicalTest.birthdate.value, 'yyyy-MM-dd'),
       height: physicalTest.height.value,
       weight: physicalTest.weight.value,
       flexibilityFirstAttempt: physicalTest.flexibilityFirstAttempt?.value,
