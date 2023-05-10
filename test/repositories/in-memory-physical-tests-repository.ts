@@ -22,7 +22,7 @@ export class InMemoryPhysicalTestsRepository extends PhysicalTestsRepository {
     );
   }
 
-  findByid(id: string): Promise<PhysicalTest | null> {
+  findById(id: string): Promise<PhysicalTest | null> {
     return Promise.resolve(
       this.physicalTests.find(item => item.id === id) || null,
     );

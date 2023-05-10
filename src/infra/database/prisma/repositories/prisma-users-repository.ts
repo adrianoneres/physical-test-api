@@ -9,6 +9,20 @@ import { PrismaService } from '../prisma.service';
 export class PrismaUsersRepository implements UsersRepository {
   constructor(private prismaService: PrismaService) {}
 
+  async findById(id: string): Promise<User | null> {
+    const user = await this.prismaService.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!user) {
+      return null;
+    }
+
+    return PrismaUserMapper.toDomain(user);
+  }
+
   async findByUsername(username: string): Promise<User | null> {
     const user = await this.prismaService.user.findFirst({
       where: {
@@ -28,6 +42,15 @@ export class PrismaUsersRepository implements UsersRepository {
 
     await this.prismaService.user.create({
       data: raw,
+    });
+  }
+
+  async changePassword(id: string, password: string): Promise<void> {
+    await this.prismaService.user.update({
+      where: { id },
+      data: {
+        password,
+      },
     });
   }
 }

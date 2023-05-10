@@ -15,7 +15,7 @@ export interface CountProps {
 export abstract class ProfessionalsRepository {
   abstract count(props: CountProps): Promise<number>;
   abstract findMany(props: FindManyProps): Promise<Professional[]>;
-  abstract findByid(id: string): Promise<Professional | null>;
+  abstract findById(id: string): Promise<Professional | null>;
   abstract create(professional: Professional): Promise<void>;
   abstract save(professional: Professional): Promise<void>;
 }

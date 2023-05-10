@@ -19,7 +19,7 @@ export class ViewPhysicalTestService {
   async execute({
     id,
   }: ViewPhysicalTestRequest): Promise<ViewPhysicalTestResponse> {
-    const physicalTest = await this.physicalTestsRepository.findByid(id);
+    const physicalTest = await this.physicalTestsRepository.findById(id);
 
     if (!physicalTest) {
       throw new RegisterNotFoundError();

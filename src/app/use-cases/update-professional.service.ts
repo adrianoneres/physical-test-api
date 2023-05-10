@@ -17,19 +17,19 @@ type UpdateProfessionalResponse = void;
 export class UpdateProfessionalService {
   constructor(private professionalsRepository: ProfessionalsRepository) {}
 
-  async execute(
-    request: UpdateProfessionalRequest,
-  ): Promise<UpdateProfessionalResponse> {
-    const professional = await this.professionalsRepository.findByid(
-      request.id,
-    );
+  async execute({
+    id,
+    name,
+    registration,
+  }: UpdateProfessionalRequest): Promise<UpdateProfessionalResponse> {
+    const professional = await this.professionalsRepository.findById(id);
 
     if (!professional) {
       throw new RegisterNotFoundError();
     }
 
-    professional.name = new Name(request.name, false);
-    professional.registration = new Registration(request.registration, false);
+    professional.name = new Name(name, false);
+    professional.registration = new Registration(registration, false);
 
     await this.professionalsRepository.save(professional);
   }

@@ -60,7 +60,7 @@ export class PrismaProfessionalsRepository implements ProfessionalsRepository {
     return professionals.map(PrismaProfessionalMapper.toDomain);
   }
 
-  async findByid(id: string): Promise<Professional | null> {
+  async findById(id: string): Promise<Professional | null> {
     const professional = await this.prismaService.professional.findUnique({
       where: {
         id,

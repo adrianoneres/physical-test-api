@@ -15,16 +15,17 @@ type UpdateInstitutionResponse = void;
 export class UpdateInstitutionService {
   constructor(private institutionsRepository: InstitutionsRepository) {}
 
-  async execute(
-    request: UpdateInstitutionRequest,
-  ): Promise<UpdateInstitutionResponse> {
-    const institution = await this.institutionsRepository.findByid(request.id);
+  async execute({
+    id,
+    name,
+  }: UpdateInstitutionRequest): Promise<UpdateInstitutionResponse> {
+    const institution = await this.institutionsRepository.findById(id);
 
     if (!institution) {
       throw new RegisterNotFoundError();
     }
 
-    institution.name = new Name(request.name, false);
+    institution.name = new Name(name, false);
 
     await this.institutionsRepository.save(institution);
   }

@@ -49,7 +49,7 @@ export class UpdatePhysicalTestService {
   async execute(
     request: UpdatePhysicalTestRequest,
   ): Promise<UpdatePhysicalTestResponse> {
-    const physicalTest = await this.physicalTestsRepository.findByid(
+    const physicalTest = await this.physicalTestsRepository.findById(
       request.id,
     );
 
@@ -57,7 +57,7 @@ export class UpdatePhysicalTestService {
       throw new RegisterNotFoundError();
     }
 
-    const institution = await this.institutionsRepository.findByid(
+    const institution = await this.institutionsRepository.findById(
       request.institution_id,
     );
 
@@ -65,7 +65,7 @@ export class UpdatePhysicalTestService {
       throw new RegisterNotFoundError('institution: not found');
     }
 
-    const professional = await this.professionalsRepository.findByid(
+    const professional = await this.professionalsRepository.findById(
       request.professional_id,
     );
 

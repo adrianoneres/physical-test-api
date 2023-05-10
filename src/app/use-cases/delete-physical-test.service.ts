@@ -16,7 +16,7 @@ export class DeletePhysicalTestService {
   async execute({
     id,
   }: DeletePhysicalTestRequest): Promise<DeletePhysicalTestResponse> {
-    const physicalTest = await this.physicalTestsRepository.findByid(id);
+    const physicalTest = await this.physicalTestsRepository.findById(id);
 
     if (!physicalTest) {
       throw new RegisterNotFoundError();

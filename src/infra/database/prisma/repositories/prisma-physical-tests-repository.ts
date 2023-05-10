@@ -77,7 +77,7 @@ export class PrismaPhysicalTestsRepository implements PhysicalTestsRepository {
     );
   }
 
-  async findByid(id: string): Promise<PhysicalTest | null> {
+  async findById(id: string): Promise<PhysicalTest | null> {
     const physicalTest = await this.prismaService.physicalTest.findUnique({
       include: {
         institution: true,

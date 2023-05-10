@@ -14,11 +14,11 @@ type CreateInstitutionResponse = void;
 export class CreateInstitutionService {
   constructor(private institutionsRepository: InstitutionsRepository) {}
 
-  async execute(
-    request: CreateInstitutionRequest,
-  ): Promise<CreateInstitutionResponse> {
+  async execute({
+    name,
+  }: CreateInstitutionRequest): Promise<CreateInstitutionResponse> {
     const institution = new Institution({
-      name: new Name(request.name, false),
+      name: new Name(name, false),
     });
 
     await this.institutionsRepository.create(institution);

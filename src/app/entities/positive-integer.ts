@@ -29,7 +29,6 @@ export class PositiveInteger {
     }
 
     const isIntegerValid = this.validateIntegerValue(integer);
-    console.log(isIntegerValid);
 
     if (!isIntegerValid) {
       throw new InvalidIntegerError();

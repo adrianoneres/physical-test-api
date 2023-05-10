@@ -16,7 +16,7 @@ export class DeleteProfessionalService {
   async execute({
     id,
   }: DeleteProfessionalRequest): Promise<DeleteProfessionalResponse> {
-    const professional = await this.professionalsRepository.findByid(id);
+    const professional = await this.professionalsRepository.findById(id);
 
     if (!professional) {
       throw new RegisterNotFoundError();

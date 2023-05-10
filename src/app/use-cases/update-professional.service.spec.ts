@@ -20,7 +20,7 @@ describe('UpdateProfessionalService', () => {
       registration: '654321',
     });
 
-    const updatedProfessional = await professionalsRepository.findByid(
+    const updatedProfessional = await professionalsRepository.findById(
       professional.id,
     );
 

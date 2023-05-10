@@ -16,6 +16,7 @@ export class AppModule implements NestModule {
         'institutions',
         'professionals',
         'physical-tests',
+        'users',
       );
   }
 }

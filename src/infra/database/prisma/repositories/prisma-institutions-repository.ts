@@ -47,7 +47,7 @@ export class PrismaInstitutionsRepository implements InstitutionsRepository {
     return institutions.map(PrismaInstitutionMapper.toDomain);
   }
 
-  async findByid(id: string): Promise<Institution | null> {
+  async findById(id: string): Promise<Institution | null> {
     const institution = await this.prismaService.institution.findUnique({
       where: {
         id,

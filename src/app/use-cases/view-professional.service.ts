@@ -19,7 +19,7 @@ export class ViewProfessionalService {
   async execute({
     id,
   }: ViewProfessionalRequest): Promise<ViewProfessionalResponse> {
-    const professional = await this.professionalsRepository.findByid(id);
+    const professional = await this.professionalsRepository.findById(id);
 
     if (!professional) {
       throw new RegisterNotFoundError();

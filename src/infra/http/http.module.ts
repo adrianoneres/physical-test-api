@@ -4,6 +4,7 @@ import { SignInController } from './controllers/sign-in.controller';
 import { InstitutionsController } from './controllers/institutions.controller';
 import { ProfessionalsController } from './controllers/professionals.controller';
 import { PhysicalTestsController } from './controllers/physical-tests.controller';
+import { UsersController } from './controllers/users.controller';
 import { SignInService } from '@app/use-cases/sign-in.service';
 import { ListInstitutionsService } from '@app/use-cases/list-institutions.service';
 import { ViewInstitutionService } from '@app/use-cases/view-institution.service';
@@ -21,6 +22,8 @@ import { CreatePhysicalTestService } from '@app/use-cases/create-physical-test.s
 import { ViewPhysicalTestService } from '@app/use-cases/view-physical-test.service';
 import { UpdatePhysicalTestService } from '@app/use-cases/update-physical-test.service';
 import { DeletePhysicalTestService } from '@app/use-cases/delete-physical-test.service';
+import { CreateUserService } from '@app/use-cases/create-user.service';
+import { ChangeUserPasswordService } from '@app/use-cases/change-user-password.service';
 import { DatabaseModule } from '@infra/database/database.module';
 import { HashModule } from '@infra/hash/hash.module';
 import { JwtModule } from '@infra/jwt/jwt.module';
@@ -32,6 +35,7 @@ import { JwtModule } from '@infra/jwt/jwt.module';
     InstitutionsController,
     ProfessionalsController,
     PhysicalTestsController,
+    UsersController,
   ],
   providers: [
     SignInService,
@@ -51,6 +55,8 @@ import { JwtModule } from '@infra/jwt/jwt.module';
     CreatePhysicalTestService,
     UpdatePhysicalTestService,
     DeletePhysicalTestService,
+    CreateUserService,
+    ChangeUserPasswordService,
   ],
 })
 export class HttpModule {}

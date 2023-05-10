@@ -59,7 +59,7 @@ describe('UpdatePhysicalTestService', () => {
       speed: physicalTest.speed!.value,
     });
 
-    const updatedPhysicalTest = await physicalTestsRepository.findByid(
+    const updatedPhysicalTest = await physicalTestsRepository.findById(
       physicalTest.id,
     );
 

@@ -16,12 +16,13 @@ type CreateProfessionalResponse = void;
 export class CreateProfessionalService {
   constructor(private professionalsRepository: ProfessionalsRepository) {}
 
-  async execute(
-    request: CreateProfessionalRequest,
-  ): Promise<CreateProfessionalResponse> {
+  async execute({
+    name,
+    registration,
+  }: CreateProfessionalRequest): Promise<CreateProfessionalResponse> {
     const professional = new Professional({
-      name: new Name(request.name, false),
-      registration: new Registration(request.registration, false),
+      name: new Name(name, false),
+      registration: new Registration(registration, false),
     });
 
     await this.professionalsRepository.create(professional);

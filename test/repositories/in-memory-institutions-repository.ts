@@ -19,7 +19,7 @@ export class InMemoryInstitutionsRepository extends InstitutionsRepository {
     );
   }
 
-  findByid(id: string): Promise<Institution | null> {
+  findById(id: string): Promise<Institution | null> {
     return Promise.resolve(
       this.institutions.find(item => item.id === id) || null,
     );

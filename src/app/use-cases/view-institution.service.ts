@@ -19,7 +19,7 @@ export class ViewInstitutionService {
   async execute({
     id,
   }: ViewInstitutionRequest): Promise<ViewInstitutionResponse> {
-    const institution = await this.institutionsRepository.findByid(id);
+    const institution = await this.institutionsRepository.findById(id);
 
     if (!institution) {
       throw new RegisterNotFoundError();

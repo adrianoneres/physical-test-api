@@ -19,7 +19,7 @@ describe('UpdateInstitutionService', () => {
       name: 'updated value',
     });
 
-    const updatedInstitution = await institutionsRepository.findByid(
+    const updatedInstitution = await institutionsRepository.findById(
       institution.id,
     );
 

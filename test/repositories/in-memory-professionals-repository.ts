@@ -19,7 +19,7 @@ export class InMemoryProfessionalsRepository extends ProfessionalsRepository {
     );
   }
 
-  findByid(id: string): Promise<Professional | null> {
+  findById(id: string): Promise<Professional | null> {
     return Promise.resolve(
       this.professionals.find(item => item.id === id) || null,
     );
